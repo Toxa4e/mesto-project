@@ -1,0 +1,19 @@
+.profile-info__button{
+    width: 22px;
+    height: 22px;
+    border: 1px solid #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media screen and (max-width:450px) {
+    .profile-info__button {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.profile-info__button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}

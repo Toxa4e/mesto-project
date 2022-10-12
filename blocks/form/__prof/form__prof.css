@@ -1,0 +1,13 @@
+.form__prof {
+    margin: 30px auto 0;
+    padding: 0 0 13px;
+    width: 358px;
+    height: 14px;
+    border: 0;
+    border-bottom:1px solid #000000;
+}
+@media screen and (max-width:534px){
+    .form__prof {
+        width: 238px;
+    }
+}

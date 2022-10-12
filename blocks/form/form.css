@@ -1,0 +1,21 @@
+.form {
+    margin-top: 195px;
+    position: relative;
+    width: 430px;
+    height: 330px;
+    color:#000000;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+@media screen and (max-width:534px){
+    .form {
+        width: 282px;
+        height: 322px;
+    }    
+}
+@media screen and (max-width:320px){
+    .form {
+        margin-top: 123px;
+    }    
+}

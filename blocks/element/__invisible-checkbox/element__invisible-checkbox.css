@@ -1,0 +1,19 @@
+.element__invisible-checkbox {
+    position: absolute;
+    width: 1px; /* если у элемента не будет размеров, некоторые браузеры посчитают, что его вообще нет */
+    height: 1px;
+    overflow: hidden; /* без этого свойства тоже сработает, но так наверняка. Мы его ещё изучим, оно скрывает элементы, выходящие за границы родителя */
+    clip: rect(0 0 0 0);
+} 
+
+.element__invisible-checkbox:checked + .element__visible-checkbox {
+    background-image: url('../../../images/element-group_active.svg');
+}
+.element__invisible-checkbox:checked:hover + .element__visible-checkbox {
+    opacity: 1;
+}
+
+.element__invisible-checkbox:hover + .element__visible-checkbox {
+    opacity: 0.5;
+    cursor: pointer;
+}
