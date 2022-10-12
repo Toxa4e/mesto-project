@@ -3,8 +3,5 @@
     vertical-align: middle; /* элемент и текст будут правильно выровнены по вертикали. Работает в паре с inline-block */
     width: 22px;
     height: 19px; /* размеры */
-}
-
-.element__visible-checkbox {
     background-image: url('../../../images/element-group.svg');
 }
