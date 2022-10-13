@@ -27,6 +27,12 @@
         margin: 7px 0 0;
     }
 }
+
+@media screen and (max-width:320px) {
+    .profile__button {
+        background-size: 16px 16px;
+    }
+}
     
 .profile__button:hover {
     opacity: 0.6;
