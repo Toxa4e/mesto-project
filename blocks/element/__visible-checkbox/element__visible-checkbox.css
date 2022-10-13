@@ -1,7 +1,0 @@
-.element__visible-checkbox{
-    display: inline-block; /* элемент span теперь сможет принимать определённую ширину и высоту */
-    vertical-align: middle; /* элемент и текст будут правильно выровнены по вертикали. Работает в паре с inline-block */
-    width: 22px;
-    height: 19px; /* размеры */
-    background-image: url('../../../images/element-group.svg');
-}
