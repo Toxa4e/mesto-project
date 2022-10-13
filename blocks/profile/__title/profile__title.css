@@ -18,3 +18,8 @@
         text-align: center;
     }
 }
+@media screen and (max-width:320px) {
+    .profile__title {
+        margin-left: 28px;
+    }
+}
