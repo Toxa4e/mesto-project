@@ -29,20 +29,50 @@
 <fieldset>      <!--группирует элементы формы в блок с характерным выделением границ-->
 <form>      <!--добавляет на страницу форму-->
 <input>      <!--позволяет создавать поле для ввода текста-->
-<input type="checkbox"> <!-- поле множественного выбора (флажок) -->
+
+<form action="#" class="form" name="form-popup">
+                    <!-- Элементы формы для получения данных об имени пользователе -->
+                    <input type="text" class="form__input" name="name" required placeholder="Имя">
+                    <!-- Элементы формы для информации о нём -->
+                    <input type="text" class="form__input" name="hobbi" required placeholder="О себе">
+
+<!--Кнопка закрытия формы-->
+                <button class="popup__close-icon" type="button"></button>
 
 ```
 
 ## CSS
-С помощью CSS стандартные "чекбоксы" были спрятаны, и заменены стилизованной картинкой
+С помощью CSS стандартные кнопки и формы были стилизованны
 
 ```CSS
-.element__invisible-checkbox /*спрятан стандартный чекбокс*/
-.element__visible-checkbox /*замена стандартного на стилизованный*/
+.element__button {
+    /*...*/
+
+    background-image: url('../../../images/element-group.svg'); 
+    }
+
+.form__input {
+    border: 0;
+    /*...*/
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    /*...*/
+    border-bottom:1px solid rgb(0 0 0 / 0.2);
+}
+
 ```
 Для разных состояний кнопки 
 ```CSS
-.element__invisible-checkbox:checked
-.element__invisible-checkbox:checked:hover
-.element__invisible-checkbox:hover
+.element__button:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.element__button:active {
+    background-image: url('../../../images/element-group_active.svg');
+    opacity: 1;
+}
 ```
