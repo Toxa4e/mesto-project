@@ -17,3 +17,8 @@
         gap: 26px;
     }
 }
+@media screen and (max-width:630px) {
+    .profile {
+        flex-direction: column;
+    }
+}

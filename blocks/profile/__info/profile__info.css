@@ -3,7 +3,7 @@
     display: grid;
     column-gap: 19px;
     row-gap: 7px;
-    grid-template-columns:3fr 16px;
+    grid-template-columns:3fr 24px;
     grid-template-rows:2fr 1fr;
     grid-template-areas:
     "title edit-button"
@@ -12,11 +12,15 @@
 
 @media screen and (max-width:614px) {
     .profile__info {
-        max-width: 282px;
+        
     }
 }
-@media screen and (max-width:320px) {
+
+
+@media screen and (max-width:630px) {
     .profile__info {
+        max-width: 282px;
+        grid-template-columns:3fr 16px;
         column-gap: 10px;
     }
 }
