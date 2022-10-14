@@ -10,18 +10,14 @@
     "subtitle subtitle";
 }
 
-@media screen and (max-width:614px) {
-    .profile__info {
-        
-    }
-}
-
-
 @media screen and (max-width:630px) {
     .profile__info {
         max-width: 282px;
-        grid-template-columns:3fr 18px;
+        grid-template-columns:18px 3fr 18px;
         column-gap: 10px;
+        grid-template-areas:
+        ". title edit-button"
+        ". subtitle .";
     }
 }
 
