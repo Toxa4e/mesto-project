@@ -20,6 +20,9 @@
 
 Для этого были экспортированны картинки в виде растровых и векторных изображений с дальнейшей оптимизацией для уменьшения размера файлов и ускорение загрузки страницы. 
 
+## Интерактивность сайта
+В проект добавлен script.js написаный на языке програмирования JavaScript. Благодоря этому сайт может реагировать на действия пользователя: управлять тем, что именно он видит на странице; изменять, добавлять и удалять элементы.
+
 ## HTML
 
 Для добовления на страницу форм, которые пользователь может заполнять использовались следующие теги
@@ -77,4 +80,20 @@
     background-image: url('../../../images/element-group_active.svg');
     opacity: 1;
 }
+```
+## JS
+С помощью JS стандартные кнопки и формы стали интерактивными
+
+Кнопка лайк для карточки
+```JS
+const likeButton = document.querySelector('.element__button'); 
+      likeButton.addEventListener('click', function (evt) {
+        evt.target.classList.toggle('element__button_active');
+      });
+```
+Кнопка редактирование профиля открывает popup
+```JS
+const edit_button = document.querySelector('.profile__edit-button').addEventListener('click', function () {
+  popup.classList.toggle('popup_opened');
+});
 ```
