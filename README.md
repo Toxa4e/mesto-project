@@ -31,13 +31,17 @@
 <input>      <!--позволяет создавать поле для ввода текста-->
 
 <form action="#" class="form" name="form-popup">
-                    <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" class="form__input" name="name" required placeholder="Имя">
-                    <!-- Элементы формы для информации о нём -->
-                    <input type="text" class="form__input" name="hobbi" required placeholder="О себе">
+<!-- Элементы формы для получения данных об имени пользователе -->
+<input type="text" class="form__input" name="name" required placeholder="Имя">
+<!-- Элементы формы для информации о нём -->
+<input type="text" class="form__input" name="hobbi" required placeholder="О себе">
 
 <!--Кнопка закрытия формы-->
-                <button class="popup__close-icon" type="button"></button>
+<button class="popup__close-icon" type="button"></button>
+
+<!--контейнер для хранения HTML-кода для дальнейшего использования в JavaScript-->
+<template id="element">
+
 
 ```
 
