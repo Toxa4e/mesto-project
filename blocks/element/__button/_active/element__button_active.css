@@ -1,0 +1,4 @@
+.element__button_active {
+    background-image: url('../../../../images/element-group_active.svg');
+    opacity: 1;
+}

@@ -21,10 +21,26 @@
 
                 <form action="#" class="form" name="form-popup">
                     <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" class="form__input" name="name" required placeholder="Имя">
+                    <input type="text" id="name" class="form__input" name="name" required placeholder="Имя">
                     <!-- Элементы формы для информации о нём -->
-                    <input type="text" class="form__input" name="hobbi" required placeholder="О себе">
+                    <input type="text" id="hobbi" class="form__input" name="hobbi" required placeholder="О себе">
                     <button class="form__button" type="submit">Сохранить</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="popup-item"> <!--модификатор popup-item_opened открывает форму-->
+            <div class="popup-item__container">
+                <!--Кнопка закрытия формы-->
+                <button class="popup-item__close-icon" type="button"></button>
+                <h3 class="popup-item__title">Новое место</h3>
+
+                <form action="#" class="form-item" name="form-popup">
+                    <!-- Элементы формы для получения данных об имени пользователе -->
+                    <input type="text" id="name-card" class="form-item__input" name="name-card" required placeholder="Название ">
+                    <!-- Элементы формы для информации о нём -->
+                    <input type="text" id="link-card" class="form-item__input" name="link-card" required placeholder="Ссылка на картинку">
+                    <button class="form-item__button" type="submit">Создать</button>
                 </form>
             </div>
         </div>
@@ -41,54 +57,31 @@
 
 
         <section aria-label="карточки мест" class="elements">
-            <article class="element">
-                <img src="./images/element-karachaevsk.png" alt="старая церковь" class="element__photo">
-                <div class="element__container">
-                    <h2 class="element__title">Карачаевск</h2>
-                    <button class="element__button" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img src="./images/element-gora-elbrus.png" alt="Гора Эльбрус" class="element__photo">
-                <div class="element__container">
-                    <h2 class="element__title">Гора Эльбрус</h2>
-                    <button class="element__button" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img src="./images/element-dombay.png" alt="Гора Домбай" class="element__photo">
-                <div class="element__container">
-                    <h2 class="element__title">Домбай</h2>
-                    <button class="element__button" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img src="./images/element-gora-elbrus.png" alt="Гора Эльбрус" class="element__photo">
-                <div class="element__container">
-                    <h2 class="element__title">Гора Эльбрус</h2>
-                    <button class="element__button" type="button"></button> 
-                </div>
-            </article>
-            <article class="element">
-                <img src="./images/element-dombay.png" alt="Гора Домбай" class="element__photo">
-                <div class="element__container">
-                    <h2 class="element__title">Домбай</h2>
-                    <button class="element__button" type="button"></button> 
-                </div>
-            </article>
-            <article class="element">
-                <img src="./images/element-karachaevsk.png" alt="старая церковь" class="element__photo">
-                <div class="element__container">
-                    <h2 class="element__title">Карачаево-Черкессия</h2>
-                    <button class="element__button" type="button"></button> 
-                </div>
-            </article>
-        </section>
+            <template id="element">
+                <article class="element">
+                    <img class="element__photo">
+                    <button class="element__del-button" type="button"></button>
+                    <div class="element__container">
+                        <h2 class="element__title"></h2>
+                        <button class="element__button" type="button"></button>
+                    </div>
+                    <figure class="figure">  <!--модификатор figure__opened открывает форму-->
+                        <div class="figure__container">
+                            <img class="figure__picture">
+                            <figcaption class="figure__figcaption"></figcaption>
+                            <button class="figure__close-icon" type="button"></button>
+                        </div>
+                    </figure>
+                </article>
+            </template>
+    
     </main>
 
     <footer class="footer">
         <p class="footer__title">&copy; 2020 Mesto Russia</p>
     </footer>
     
+    <script src="script.js"></script>
+
 </body>
 </html>
