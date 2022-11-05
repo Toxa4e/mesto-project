@@ -16,10 +16,6 @@
     cursor: pointer;
 }
 
-.element__button:active {
-    background-image: url('../../../images/element-group_active.svg');
-    opacity: 1;
-}
 
 @media screen and (max-width:320) {
     .element__button {
