@@ -39,6 +39,8 @@
 <!--Кнопка закрытия формы-->
                 <button class="popup__close-icon" type="button"></button>
 
+<template id="element">
+
 ```
 
 ## CSS
