@@ -28,6 +28,15 @@
 @import url('../blocks/form-item/__input/form-item__input.css');
 @import url('../blocks/form-item/__button/form-item__button.css');
 
+/* блок формы popup-item */
+@import url('../blocks/popup-image/popup-image.css');
+@import url('../blocks/popup-image/_opened/popup-image_opened.css');    /*модификатор для открытия формы*/
+@import url('../blocks/popup-image/__container/popup-image__container.css');
+@import url('../blocks/popup-image/__close-icon/popup-image__close-icon.css');
+/* figure */
+@import url('../blocks/figure/figure.css');
+@import url('../blocks/figure/__picture/figure__picture.css');
+@import url('../blocks/figure/__figcaption/figure__figcaption.css');
 
 /* profile */
 @import url('../blocks/profile/profile.css');
@@ -47,14 +56,6 @@
 @import url('../blocks/element/__title/element__title.css');
 @import url('../blocks/element/__button/element__button.css');
 @import url('../blocks/element/__button/_active/element__button_active.css');
-
-/* figure */
-@import url('../blocks/figure/figure.css');
-@import url('../blocks/figure/_opened/figure_opened.css');
-@import url('../blocks/figure/__container/figure__container.css');
-@import url('../blocks/figure/__close-icon/figure__close-icon.css');
-@import url('../blocks/figure/__picture/figure__picture.css');
-@import url('../blocks/figure/__figcaption/figure__figcaption.css');
 
 /* footer */
 @import url('../blocks/footer/footer.css');
