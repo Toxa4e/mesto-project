@@ -30,18 +30,18 @@ const elements = document.querySelector('.elements');
       elements.prepend(elementElement); // отображаем на странице
 
       //открытие картинки по нажатию на неё
-      const figureElement = document.querySelector('.figure');
+      const popupImage = document.querySelector('.popup-image');
       const pictureElement = document.querySelector('.figure__picture');
       const figcaptionElement = document.querySelector('.figure__figcaption');
       const photoElement = elementElement.querySelector('.element__photo').addEventListener('click', function () {
         pictureElement.src = elementElement.querySelector('.element__photo').src;
         pictureElement.alt = elementElement.querySelector('.element__photo').src;
         figcaptionElement.textContent = elementElement.querySelector('.element__title').textContent;
-        figureElement.classList.toggle('figure_opened');     
+        popupImage.classList.toggle('popup-image_opened');     
       });
       //закрытие картинки по нажатию на иконку крестика
-      const close_icon = document.querySelector('.figure__close-icon').addEventListener('click', function () {
-        figureElement.classList.remove('figure_opened');
+      const closeIcon = document.querySelector('.popup-image__close-icon').addEventListener('click', function () {
+        popupImage.classList.remove('popup-image_opened');
       });
             
       //кнопка лайк для карточки
@@ -61,7 +61,7 @@ addItem();
 
 
 // Находим форму редактирования профиля в DOM
-const popup = document.querySelector('.popup');
+const popupForm = document.querySelector('.popup');
 const formElement = document.querySelector('.form');
 const nameImput = document.getElementById('name');
 const hobbiInput = document.getElementById('hobbi');
@@ -79,7 +79,7 @@ hobbiInput.value = profileSubtitle.textContent;
 function handleFormSubmit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
-    // Получите значение полей jobInput и nameInput из свойства value
+    // Получить значение полей jobInput и nameInput из свойства value
     console.log(`Имя профиля: ${nameImput.value}`);
     console.log(`Хобби: ${hobbiInput.value}`);
     
@@ -87,19 +87,19 @@ function handleFormSubmit(evt) {
     profileTitle.textContent = nameImput.value;
     profileSubtitle.textContent = hobbiInput.value;
     
-    popup.classList.toggle('popup_opened');
+    popupForm.classList.toggle('popup_opened');
 }
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit); 
 
 // кнопка редактирование профиля открывает popup
-const edit_button = document.querySelector('.profile__edit-button').addEventListener('click', function () {
-  popup.classList.toggle('popup_opened');
+const editButton = document.querySelector('.profile__edit-button').addEventListener('click', function () {
+  popupForm.classList.toggle('popup_opened');
 });
 // кнопка закрытия для popup
-const close_icon = document.querySelector('.popup__close-icon').addEventListener('click', function () {
-  popup.classList.toggle('popup_opened');
+const closeButton = document.querySelector('.popup__close-icon').addEventListener('click', function () {
+  popupForm.classList.toggle('popup_opened');
   nameImput.value = profileTitle.textContent;
   hobbiInput.value = profileSubtitle.textContent;
 });
@@ -132,18 +132,18 @@ function itemFormSubmit(evt) {
       elements.prepend(elementElement); // отображаем на странице
 
     //открытие картинки по нажатию на неё
-    const figureElement = document.querySelector('.figure');
+    const popupImage = document.querySelector('.popup-image');
     const pictureElement = document.querySelector('.figure__picture');
     const figcaptionElement = document.querySelector('.figure__figcaption');
     const photoElement = elementElement.querySelector('.element__photo').addEventListener('click', function () {
       pictureElement.src = elementElement.querySelector('.element__photo').src;
       pictureElement.alt = elementElement.querySelector('.element__photo').src;
       figcaptionElement.textContent = elementElement.querySelector('.element__title').textContent;
-      figureElement.classList.toggle('figure_opened');     
+      popupImage.classList.toggle('popup-image_opened');     
     });
     //закрытие картинки по нажатию на иконку крестика
-    const close_icon = document.querySelector('.figure__close-icon').addEventListener('click', function () {
-      figureElement.classList.remove('figure_opened');
+    const closeIcon = document.querySelector('.popup-image__close-icon').addEventListener('click', function () {
+      popupImage.classList.remove('popup-image_opened');
     });
 
     const buttonDelet = document.querySelector('.element__del-button'); //кнопка удаления
