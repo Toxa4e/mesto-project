@@ -26,10 +26,6 @@ const elements = document.querySelector('.elements');
       elementElement.querySelector('.element__photo').src = `${initialCards[i].link}`;
       elementElement.querySelector('.element__photo').alt = `${initialCards[i].name}`;        
       elementElement.querySelector('.element__title').textContent = `${initialCards[i].name}`;
-      // наполняем содержимым (открывающиеся картинки)
-      //elementElement.querySelector('.figure__picture').src = `${initialCards[i].link}`;
-      //elementElement.querySelector('.figure__picture').alt = `${initialCards[i].name}`;
-      //elementElement.querySelector('.figure__figcaption').textContent = `${initialCards[i].name}`;
       
       elements.prepend(elementElement); // отображаем на странице
 
@@ -132,22 +128,22 @@ function itemFormSubmit(evt) {
       elementElement.querySelector('.element__photo').src = `${linkCard.value}`;
       elementElement.querySelector('.element__photo').alt = `${nameCard.value}`;        
       elementElement.querySelector('.element__title').textContent = `${nameCard.value}`;
-      // наполняем содержимым (открывающиеся картинки)
-      elementElement.querySelector('.figure__picture').src = `${linkCard.value}`;
-      elementElement.querySelector('.figure__picture').alt = `${nameCard.value}`;
-      elementElement.querySelector('.figure__figcaption').textContent = `${nameCard.value}`;
       
       elements.prepend(elementElement); // отображаем на странице
 
     //открытие картинки по нажатию на неё
-    const figureElement = elementElement.querySelector('.figure');
+    const figureElement = document.querySelector('.figure');
+    const pictureElement = document.querySelector('.figure__picture');
+    const figcaptionElement = document.querySelector('.figure__figcaption');
     const photoElement = elementElement.querySelector('.element__photo').addEventListener('click', function () {
-      figureElement.classList.toggle('figure_opened');
-      console.log(`все классы для формы: ${figureElement.classList}`);      
+      pictureElement.src = elementElement.querySelector('.element__photo').src;
+      pictureElement.alt = elementElement.querySelector('.element__photo').src;
+      figcaptionElement.textContent = elementElement.querySelector('.element__title').textContent;
+      figureElement.classList.toggle('figure_opened');     
     });
     //закрытие картинки по нажатию на иконку крестика
     const close_icon = document.querySelector('.figure__close-icon').addEventListener('click', function () {
-      figureElement.classList.toggle('figure_opened');
+      figureElement.classList.remove('figure_opened');
     });
 
     const buttonDelet = document.querySelector('.element__del-button'); //кнопка удаления
