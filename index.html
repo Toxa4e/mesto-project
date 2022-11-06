@@ -45,6 +45,16 @@
             </div>
         </div>
 
+        <div class="popup-image">  <!--модификатор popup-image__opened открывает форму-->
+            <div class="popup-image__container">
+                <figure class="figure">
+                    <img class="figure__picture" src="#" alt="#">
+                    <figcaption class="figure__figcaption"></figcaption>
+                </figure>
+                <button class="popup-image__close-icon" type="button"></button>
+            </div>
+        </div>
+
         <section class="profile">
             <img src="./images/profile__avatar.png" alt="Фотограффия Жак-Ив Кусто" class="profile__avatar">
             <div class="profile__info">
@@ -59,22 +69,15 @@
         <section aria-label="карточки мест" class="elements">
             <template id="element">
                 <article class="element">
-                    <img class="element__photo">
+                    <img class="element__photo" src="#" alt="#">
                     <button class="element__del-button" type="button"></button>
                     <div class="element__container">
                         <h2 class="element__title"></h2>
                         <button class="element__button" type="button"></button>
                     </div>
-                    <figure class="figure">  <!--модификатор figure__opened открывает форму-->
-                        <div class="figure__container">
-                            <img class="figure__picture">
-                            <figcaption class="figure__figcaption"></figcaption>
-                            <button class="figure__close-icon" type="button"></button>
-                        </div>
-                    </figure>
                 </article>
             </template>
-    
+        </section>    
     </main>
 
     <footer class="footer">
