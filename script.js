@@ -88,8 +88,6 @@ function addAtributeFigure () {
   });
 };
 
-
-
 function createCard() { // тут создаем карточку и возвращаете её
   const elementTemplate = document.querySelector('#element').content; //получаем содержимое template
   const elementElement = elementTemplate.querySelector('.element').cloneNode(true); //клонируем содержимое elementTemplate
@@ -99,7 +97,6 @@ function createCard() { // тут создаем карточку и возвр�
   elementElement.querySelector('.element__title').textContent = nameCardItem;
   return elementElement;
 }
-
 
 //----------------ШЕСТЬ КАРТОЧЕК---------------------
 function addSixItem() {
@@ -111,12 +108,9 @@ for (let i = 0; i < 6; i++) {
   addCardButtons();}  
 }
 addSixItem();
-//----------------ШЕСТЬ КАРТОЧЕК---------------------
-
-
 
 //-----------------ДОБОВЛЕНИЕ КАРТОЧЕК ВРУЧНУЮ------------------
-function itemFormSubmit(evt) {
+function handleItemFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
   console.log(`Название места: ${nameCard.value}`);
@@ -129,18 +123,8 @@ function itemFormSubmit(evt) {
   popupItem.classList.remove('popup_opened');
   evt.target.reset(); //сбрасывает поля формы
   }
-
 // Прикрепляем обработчик к форме
-formItem.addEventListener('submit', itemFormSubmit); 
-//-----------------ДОБОВЛЕНИЕ КАРТОЧЕК ВРУЧНУЮ------------------
-
-
-
-
-
-
-
-
+formItem.addEventListener('submit', handleItemFormSubmit); 
 
 // -------------РЕДАКТИРОВАНИЕ ПРОФИЛЯ------------------------
 // При открытии формы поля «Имя» и «О себе» должны быть заполнены теми значениями, 
@@ -155,7 +139,3 @@ formElement.addEventListener('submit', function(evt) {
   profileSubtitle.textContent = hobbiInput.value;
   popupProfile.classList.remove('popup_opened');
 }); 
-// -------------РЕДАКТИРОВАНИЕ ПРОФИЛЯ------------------------
-
-
-
