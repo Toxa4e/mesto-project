@@ -101,3 +101,6 @@ const edit_button = document.querySelector('.profile__edit-button').addEventList
   popup.classList.toggle('popup_opened');
 });
 ```
+
+## GitHub Pages
+https://toxa4e.github.io/mesto-project/
