@@ -12,7 +12,7 @@
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/popup/_opened/popup_opened.css');    /*модификатор для открытия формы*/
 @import url('../blocks/popup/__container/popup__container.css');
-@import url('../blocks/popup/__close-icon/popup__close-icon.css');
+@import url('../blocks/popup/__close/popup__close.css');
 @import url('../blocks/popup/__title/popup__title.css');
 @import url('../blocks/form/form.css');
 @import url('../blocks/form/__input/form__input.css');
@@ -20,7 +20,6 @@
 
 /* блок формы popup-item */
 @import url('../blocks/popup-item/popup-item.css');
-@import url('../blocks/popup-item/_opened/popup-item_opened.css');    /*модификатор для открытия формы*/
 @import url('../blocks/popup-item/__container/popup-item__container.css');
 @import url('../blocks/popup-item/__close-icon/popup-item__close-icon.css');
 @import url('../blocks/popup-item/__title/popup-item__title.css');
@@ -30,7 +29,6 @@
 
 /* блок формы popup-item */
 @import url('../blocks/popup-image/popup-image.css');
-@import url('../blocks/popup-image/_opened/popup-image_opened.css');    /*модификатор для открытия формы*/
 @import url('../blocks/popup-image/__container/popup-image__container.css');
 @import url('../blocks/popup-image/__close-icon/popup-image__close-icon.css');
 /* figure */

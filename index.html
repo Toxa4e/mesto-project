@@ -13,15 +13,15 @@
     </header>
 
     <main>
-        <div class="popup"> <!--модификатор popup_opened открывает форму-->
+        <div class="popup profile-popup"> <!--модификатор popup_opened открывает форму редоктирования профиля-->
             <div class="popup__container">
                 <!--Кнопка закрытия формы-->
-                <button class="popup__close-icon" type="button"></button>
+                <button class="popup__close" type="button"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
 
-                <form action="#" class="form" name="form-popup">
+                <form action="#" class="form" name="form-profile">
                     <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" id="name" class="form__input" name="name" required placeholder="Имя">
+                    <input type="text" id="name-profile" class="form__input" name="name-profile" required placeholder="Имя">
                     <!-- Элементы формы для информации о нём -->
                     <input type="text" id="hobbi" class="form__input" name="hobbi" required placeholder="О себе">
                     <button class="form__button" type="submit">Сохранить</button>
@@ -29,15 +29,15 @@
             </div>
         </div>
 
-        <div class="popup-item"> <!--модификатор popup-item_opened открывает форму-->
+        <div class="popup popup-item"> <!--модификатор popup_opened открывает форму добавления карточек-->
             <div class="popup-item__container">
                 <!--Кнопка закрытия формы-->
-                <button class="popup-item__close-icon" type="button"></button>
+                <button class="popup__close" type="button"></button>
                 <h3 class="popup-item__title">Новое место</h3>
 
-                <form action="#" class="form-item" name="form-popup">
+                <form action="#" class="form-item" name="form-item">
                     <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" id="name-card" class="form-item__input" name="name-card" required placeholder="Название ">
+                    <input type="text" id="name-card" class="form-item__input" name="name-card" required placeholder="Название">
                     <!-- Элементы формы для информации о нём -->
                     <input type="text" id="link-card" class="form-item__input" name="link-card" required placeholder="Ссылка на картинку">
                     <button class="form-item__button" type="submit">Создать</button>
@@ -45,13 +45,13 @@
             </div>
         </div>
 
-        <div class="popup-image">  <!--модификатор popup-image__opened открывает форму-->
+        <div class="popup popup-image">  <!--модификатор popup__opened открывает картинку с карточки-->
             <div class="popup-image__container">
                 <figure class="figure">
                     <img class="figure__picture" src="#" alt="#">
                     <figcaption class="figure__figcaption"></figcaption>
                 </figure>
-                <button class="popup-image__close-icon" type="button"></button>
+                <button class="popup__close" type="button"></button>
             </div>
         </div>
 
