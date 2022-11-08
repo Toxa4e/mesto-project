@@ -12,26 +12,26 @@ const initialCards = [
   { name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'}
 ]; 
-const popup = document.querySelectorAll('.popup');  // находим все popup
+const popups = document.querySelectorAll('.popup');  // находим все popup
 const popupProfile = document.querySelector('.profile-popup');
 const popupItem = document.querySelector('.popup-item');
 const profileEditButton = document.querySelector('.profile__edit-button');  //кнопка открытия формы редоктирования профиля
 const profileButton = document.querySelector('.profile__button'); //кнопка открытия формы для создания карточек
-const popupClose = document.querySelectorAll('.popup__close'); // находим все кнопки закрытия проекта
+const popupsClose = document.querySelectorAll('.popup__close'); // находим все кнопки закрытия проекта
 
 const elements = document.querySelector('.elements');
 
 // Находим форму редактирования профиля в DOM
-const formElement = document.querySelector('.form');
-const nameImput = document.getElementById('name-profile');
-const hobbiInput = document.getElementById('hobbi');
+const formElement = document.querySelector('.form');  // Поиск формы по классу
+const nameImput = document.querySelector('#name-profile');
+const hobbiInput = document.querySelector('#hobbi');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
 //  Находим форму добавления карточек в DOM
-const formItem = document.querySelector('.form-item');
-const nameCard = document.getElementById('name-card');
-const linkCard = document.getElementById('link-card');
+const formItem = document.querySelector('.form-item');  // Поиск формы по классу
+const nameCard = document.querySelector('#name-card');
+const linkCard = document.querySelector('#link-card');
 let nameCardItem;
 let linkCardItem;
 
@@ -40,8 +40,10 @@ const popupImage = document.querySelector('.popup-image');
 const pictureElement = document.querySelector('.figure__picture');
 const figcaptionElement = document.querySelector('.figure__figcaption');
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
+const elementTemplate = document.querySelector('#element').content; //получаем содержимое template
+
+function openPopup(popups) {
+  popups.classList.add('popup_opened');
 };
 // открыть popup профиля
 profileEditButton.addEventListener('click', function () {
@@ -54,15 +56,15 @@ profileButton.addEventListener('click', function () {
   openPopup(popupItem);
 });
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+function closePopup(popups) {
+  popups.classList.remove('popup_opened');
 }; 
 //закрыть любой ближайший попап для кнопки закрытия
-popupClose.forEach((button) => {
+popupsClose.forEach((button) => {
   // находим 1 раз ближайший к крестику попап 
-  const popup = button.closest('.popup');
+  const popups = button.closest('.popup');
   // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
+  button.addEventListener('click', () => closePopup(popups));
 });
 
 function addCardButtons() {
@@ -84,17 +86,17 @@ function addAtributeFigure () {
     pictureElement.src = e.target.src;
     pictureElement.alt = e.target.alt;
     figcaptionElement.textContent = e.target.alt;
-    popupImage.classList.add('popup_opened');     
+    openPopup(popupImage);     
   });
 };
 
-function createCard() { // тут создаем карточку и возвращаете её
-  const elementTemplate = document.querySelector('#element').content; //получаем содержимое template
+function createCard(item) { // тут создаем карточку и возвращаете её
+  
   const elementElement = elementTemplate.querySelector('.element').cloneNode(true); //клонируем содержимое elementTemplate
   // наполняем содержимым (карточки)
-  elementElement.querySelector('.element__photo').src = linkCardItem;
-  elementElement.querySelector('.element__photo').alt = nameCardItem;        
-  elementElement.querySelector('.element__title').textContent = nameCardItem;
+  elementElement.querySelector('.element__photo').src = item.linkCardItem;
+  elementElement.querySelector('.element__photo').alt = item.nameCardItem;        
+  elementElement.querySelector('.element__title').textContent = item.nameCardItem;
   return elementElement;
 }
 
@@ -120,7 +122,7 @@ function handleItemFormSubmit(evt) {
   elements.prepend(createCard());
   addAtributeFigure ();
   addCardButtons();
-  popupItem.classList.remove('popup_opened');
+  closePopup(popupItem);
   evt.target.reset(); //сбрасывает поля формы
   }
 // Прикрепляем обработчик к форме
@@ -137,5 +139,5 @@ formElement.addEventListener('submit', function(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameImput.value;
   profileSubtitle.textContent = hobbiInput.value;
-  popupProfile.classList.remove('popup_opened');
+  closePopup(popupProfile);
 }); 
