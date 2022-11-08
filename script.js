@@ -81,22 +81,22 @@ function addCardButtons() {
   });
 };
 
-function addAtributeFigure () {
-  const photoElement = document.querySelector('.element__photo').addEventListener('click', function (e) {
+function createCard() { // тут создаем карточку и возвращаете её
+  
+  const elementElement = elementTemplate.querySelector('.element').cloneNode(true); //клонируем содержимое elementTemplate
+  // наполняем содержимым (карточки)
+  elementElement.querySelector('.element__photo').src = linkCardItem;
+  elementElement.querySelector('.element__photo').alt = nameCardItem;        
+  elementElement.querySelector('.element__title').textContent = nameCardItem;
+
+  //  добовляем обработчик (открытие картинки)
+  elementElement.querySelector('.element__photo').addEventListener('click', function (e) {
     pictureElement.src = e.target.src;
     pictureElement.alt = e.target.alt;
     figcaptionElement.textContent = e.target.alt;
     openPopup(popupImage);     
   });
-};
 
-function createCard(item) { // тут создаем карточку и возвращаете её
-  
-  const elementElement = elementTemplate.querySelector('.element').cloneNode(true); //клонируем содержимое elementTemplate
-  // наполняем содержимым (карточки)
-  elementElement.querySelector('.element__photo').src = item.linkCardItem;
-  elementElement.querySelector('.element__photo').alt = item.nameCardItem;        
-  elementElement.querySelector('.element__title').textContent = item.nameCardItem;
   return elementElement;
 }
 
@@ -106,7 +106,6 @@ for (let i = 0; i < 6; i++) {
   linkCardItem = initialCards[i].link;
   nameCardItem = initialCards[i].name;
   elements.prepend(createCard());
-  addAtributeFigure ();
   addCardButtons();}  
 }
 addSixItem();
@@ -120,7 +119,6 @@ function handleItemFormSubmit(evt) {
   linkCardItem = linkCard.value;
   nameCardItem = nameCard.value;
   elements.prepend(createCard());
-  addAtributeFigure ();
   addCardButtons();
   closePopup(popupItem);
   evt.target.reset(); //сбрасывает поля формы
