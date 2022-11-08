@@ -67,19 +67,26 @@ popupsClose.forEach((button) => {
   button.addEventListener('click', () => closePopup(popups));
 });
 
-function addCardButtons() {
+function addCardButtons(elementElement) {
   //кнопка лайк для карточки
-  const likeButton = document.querySelector('.element__button'); 
-  likeButton.addEventListener('click', function (evt) {
+  elementElement.querySelector('.element__button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__button_active');
   });
   //кнопка удаления карточки и картинки
-  const buttonDelet = document.querySelector('.element__del-button'); 
-  buttonDelet.addEventListener('click', function () {
-      const listItem = buttonDelet.closest('.element');
+  elementElement.querySelector('.element__del-button').addEventListener('click', function () {
+      const listItem = elementElement.closest('.element');
       listItem.remove();
   });
 };
+
+function addAtributeFigure(elementElement) { 
+  elementElement.querySelector('.element__photo').addEventListener('click', function (e) { 
+    pictureElement.src = e.target.src; 
+    pictureElement.alt = e.target.alt; 
+    figcaptionElement.textContent = e.target.alt; 
+    openPopup(popupImage);       
+  }); 
+}; 
 
 function createCard() { // тут создаем карточку и возвращаете её
   
@@ -88,15 +95,10 @@ function createCard() { // тут создаем карточку и возвр�
   elementElement.querySelector('.element__photo').src = linkCardItem;
   elementElement.querySelector('.element__photo').alt = nameCardItem;        
   elementElement.querySelector('.element__title').textContent = nameCardItem;
-
-  //  добовляем обработчик (открытие картинки)
-  elementElement.querySelector('.element__photo').addEventListener('click', function (e) {
-    pictureElement.src = e.target.src;
-    pictureElement.alt = e.target.alt;
-    figcaptionElement.textContent = e.target.alt;
-    openPopup(popupImage);     
-  });
-
+  // устанавливаем обработчики
+  addAtributeFigure (elementElement);
+  addCardButtons(elementElement);
+  // возвращаем готовую карточку с установленными обработчиками
   return elementElement;
 }
 
@@ -105,8 +107,7 @@ function addSixItem() {
 for (let i = 0; i < 6; i++) {
   linkCardItem = initialCards[i].link;
   nameCardItem = initialCards[i].name;
-  elements.prepend(createCard());
-  addCardButtons();}  
+  elements.prepend(createCard());}  
 }
 addSixItem();
 
@@ -119,7 +120,6 @@ function handleItemFormSubmit(evt) {
   linkCardItem = linkCard.value;
   nameCardItem = nameCard.value;
   elements.prepend(createCard());
-  addCardButtons();
   closePopup(popupItem);
   evt.target.reset(); //сбрасывает поля формы
   }
