@@ -22,14 +22,14 @@ const popupsClose = document.querySelectorAll('.popup__close'); // находи�
 const elements = document.querySelector('.elements');
 
 // Находим форму редактирования профиля в DOM
-const formElement = document.querySelector('.form');  // Поиск формы по классу
+const formElement = document.querySelector('.form');  // Поиск формы редактирования профиля по классу
 const nameImput = document.querySelector('#name-profile');
 const hobbiInput = document.querySelector('#hobbi');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
 //  Находим форму добавления карточек в DOM
-const formItem = document.querySelector('.form-item');  // Поиск формы по классу
+const formItem = document.querySelector('.form-item');  // Поиск формы добавления карточек по классу
 const nameCard = document.querySelector('#name-card');
 const linkCard = document.querySelector('#link-card');
 let nameCardItem;
