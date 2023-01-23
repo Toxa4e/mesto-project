@@ -19,12 +19,16 @@
                 <button class="popup__close" type="button"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
 
-                <form action="#" class="form" name="form-profile">
+                <form action="#" class="form" name="formProfile" novalidate>
                     <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" id="name-profile" class="form__input" name="name-profile" required placeholder="Имя">
+                    <input type="text" id="name-profile" class="form__input" name="nameProfile" minlength="2" maxlength="40" pattern="[a-zA-Zа-яА-ЯёЁ\- ]*"
+                    data-invalid-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="Имя">
+                    <p class="name-profile-error form__input-error"></p> 
                     <!-- Элементы формы для информации о нём -->
-                    <input type="text" id="hobbi" class="form__input" name="hobbi" required placeholder="О себе">
-                    <button class="form__button" type="submit">Сохранить</button>
+                    <input type="text" id="hobbi" class="form__input" name="hobbi" minlength="2" maxlength="200" pattern="[a-zA-Zа-яА-ЯёЁ\- ]*"
+                    data-invalid-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="О себе">
+                    <p class="hobbi-error form__input-error"></p>
+                    <button class="form__submit form__button" type="submit">Сохранить</button>
                 </form>
             </div>
         </div>
@@ -35,12 +39,15 @@
                 <button class="popup__close" type="button"></button>
                 <h3 class="popup-item__title">Новое место</h3>
 
-                <form action="#" class="form-item" name="form-item">
+                <form action="#" class="form form-item" name="formCards" novalidate>
                     <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" id="name-card" class="form-item__input" name="name-card" required placeholder="Название">
+                    <input type="text" id="name-card" class="form-item__input" name="nameCard" minlength="2" maxlength="30" pattern="[a-zA-Zа-яА-ЯёЁ\- ]*"
+                    data-invalid-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="Название">
+                    <span class="name-card-error form__input-error"></span> 
                     <!-- Элементы формы для информации о нём -->
-                    <input type="text" id="link-card" class="form-item__input" name="link-card" required placeholder="Ссылка на картинку">
-                    <button class="form-item__button" type="submit">Создать</button>
+                    <input type="url" id="link-card" class="form-item__input" name="linkCard" required placeholder="Ссылка на картинку">
+                    <span class="link-card-error form__input-error"></span> 
+                    <button class="form__submit form-item__button" type="submit">Создать</button>
                 </form>
             </div>
         </div>

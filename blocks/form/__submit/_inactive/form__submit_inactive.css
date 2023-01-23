@@ -1,0 +1,19 @@
+.form__submit_inactive {
+    opacity: 0.2;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    background: #E5E5E5;
+    border: 1px solid #000000;
+    border-radius: 2px;
+}
+
+.form__submit_inactive:hover {
+    background: #000000;    
+    color: #FFFFFF;
+    opacity: 0.8;
+    cursor: pointer;
+}
