@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" type="text/css">
+    <!--<link rel="stylesheet" href="./pages/index.css" type="text/css">-->
 </head>
 <body class="page">
     <header class="header">
-        <img src="./images/header__logo.svg" alt="логотип Mesto" class="header__logo">
+        <img src="<%=require('./images/header__logo.svg')%>" alt="логотип Mesto" class="header__logo">
     </header>
 
     <main>
@@ -63,7 +63,7 @@
         </div>
 
         <section class="profile">
-            <img src="./images/profile__avatar.png" alt="Фотограффия Жак-Ив Кусто" class="profile__avatar">
+            <img src="<%=require('./images/profile__avatar.png')%>" alt="Фотограффия Жак-Ив Кусто" class="profile__avatar">
             <div class="profile__info">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <button class="profile__edit-button" type="button"></button>
@@ -91,7 +91,7 @@
         <p class="footer__title">&copy; 2020 Mesto Russia</p>
     </footer>
     
-    <script src="index.js"></script>
+    <!--<script src="index.js"></script>-->
 
 </body>
 </html>
