@@ -21,12 +21,12 @@
 
                 <form action="#" class="form" name="formProfile" novalidate>
                     <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" id="name-profile" class="form__input" name="nameProfile" minlength="2" maxlength="40" pattern="[a-zA-Zа-яА-ЯёЁ\- ]*"
-                    data-invalid-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="Имя">
+                    <input type="text" id="name-profile" class="form__input" name="nameProfile" minlength="2" maxlength="40" pattern="[a-zA-Zа-яА-ЯёЁ\-\s]+"
+                    data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="Имя">
                     <p class="name-profile-error form__input-error"></p> 
                     <!-- Элементы формы для информации о нём -->
-                    <input type="text" id="hobbi" class="form__input" name="hobbi" minlength="2" maxlength="200" pattern="[a-zA-Zа-яА-ЯёЁ\- ]*"
-                    data-invalid-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="О себе">
+                    <input type="text" id="hobbi" class="form__input" name="hobbi" minlength="2" maxlength="200" pattern="[a-zA-Zа-яА-ЯёЁ\-\s]+"
+                    data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="О себе">
                     <p class="hobbi-error form__input-error"></p>
                     <button class="form__submit form__button" type="submit">Сохранить</button>
                 </form>
@@ -41,8 +41,8 @@
 
                 <form action="#" class="form form-item" name="formCards" novalidate>
                     <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" id="name-card" class="form-item__input" name="nameCard" minlength="2" maxlength="30" pattern="[a-zA-Zа-яА-ЯёЁ\- ]*"
-                    data-invalid-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="Название">
+                    <input type="text" id="name-card" class="form-item__input" name="nameCard" minlength="2" maxlength="30" pattern="[a-zA-Zа-яА-ЯёЁ\-\s]+"
+                    data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="Название">
                     <span class="name-card-error form__input-error"></span> 
                     <!-- Элементы формы для информации о нём -->
                     <input type="url" id="link-card" class="form-item__input" name="linkCard" required placeholder="Ссылка на картинку">
@@ -91,7 +91,7 @@
         <p class="footer__title">&copy; 2020 Mesto Russia</p>
     </footer>
     
-    <script src="script.js"></script>
+    <script src="index.js"></script>
 
 </body>
 </html>
