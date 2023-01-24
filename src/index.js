@@ -172,22 +172,18 @@ const hideInputError = (formElement, inputElement) => {
 
 const isValid = (formElement, inputElement) => {
   if (inputElement.validity.patternMismatch) {
-    // данные атрибута доступны у элемента инпута через ключевое слово dataset.
-    // обратите внимание, что в js имя атрибута пишется в camelCase (да-да, в
-    // HTML мы писали в kebab-case, это не опечатка)
+      // данные атрибута доступны у элемента инпута через ключевое слово dataset.
+      // обратите внимание, что в js имя атрибута пишется в camelCase (да-да, в
+      // HTML мы писали в kebab-case, это не опечатка)
   inputElement.setCustomValidity(inputElement.dataset.errorMessage);
-  } else {
+} else {
   inputElement.setCustomValidity("");
-  }
-  if (!inputElement.validity.valid) {
-    // showInputError теперь получает параметром форму, в которой
-    // находится проверяемое поле, и само это поле
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    // hideInputError теперь получает параметром форму, в которой
-    // находится проверяемое поле, и само это поле
-    hideInputError(formElement, inputElement);
-  }
+}
+if (!inputElement.validity.valid) {
+  showInputError(formElement, inputElement, inputElement.validationMessage);
+} else {
+  hideInputError(formElement, inputElement);
+}
 }; 
 
 // Вызовем функцию isValid на каждый ввод символа
