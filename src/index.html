@@ -41,11 +41,11 @@
 
                 <form action="#" class="form form-item" name="formCards" novalidate>
                     <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" id="name-card" class="form-item__input" name="nameCard" minlength="2" maxlength="30" pattern="[a-zA-Zа-яА-ЯёЁ\-\s]+"
+                    <input type="text" id="name-card" class="form-item__input form__input" name="nameCard" minlength="2" maxlength="30" pattern="[a-zA-Zа-яА-ЯёЁ\-\s]+"
                     data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="Название">
                     <span class="name-card-error form__input-error"></span> 
                     <!-- Элементы формы для информации о нём -->
-                    <input type="url" id="link-card" class="form-item__input" name="linkCard" required placeholder="Ссылка на картинку">
+                    <input type="url" id="link-card" class="form-item__input form__input" name="linkCard" required placeholder="Ссылка на картинку">
                     <span class="link-card-error form__input-error"></span> 
                     <button class="form__submit form-item__button" type="submit">Создать</button>
                 </form>
@@ -90,7 +90,6 @@
     <footer class="footer">
         <p class="footer__title">&copy; 2020 Mesto Russia</p>
     </footer>
-    
     <!--<script src="index.js"></script>-->
 
 </body>
