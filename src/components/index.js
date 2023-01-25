@@ -15,8 +15,8 @@ elements.addEventListener('click', deletElem);
 
 formItem.addEventListener('submit', handleItemFormSubmit); 
 
-nameImput.value = profileTitle.textContent;
-hobbiInput.value = profileSubtitle.textContent; 
+//nameImput.value = profileTitle.textContent;
+//hobbiInput.value = profileSubtitle.textContent; 
 formElement.addEventListener('submit', editProfInfo); 
 
 enableValidation(validationSettings);

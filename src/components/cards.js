@@ -16,24 +16,24 @@ const initialCards = [
     { name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'}
   ];
-let nameCardItem;
-let linkCardItem;
+//let nameCardItem;
+//let linkCardItem;
 // тут создаем карточку и возвращаете её  
-function createCard() { 
+function createCard(link, name) { 
   const elementElement = elementTemplate.querySelector('.element').cloneNode(true); //клонируем содержимое elementTemplate
   // наполняем содержимым (карточки)
-  elementElement.querySelector('.element__photo').src = linkCardItem;
-  elementElement.querySelector('.element__photo').alt = nameCardItem;        
-  elementElement.querySelector('.element__title').textContent = nameCardItem;
+  elementElement.querySelector('.element__photo').src = link;
+  elementElement.querySelector('.element__photo').alt = name;        
+  elementElement.querySelector('.element__title').textContent = name;
   return elementElement;
 };
 
 //создаем массив карточек
 export function addSixItem() {
 for (let i = 0; i < 6; i++) {
-  linkCardItem = initialCards[i].link;
-  nameCardItem = initialCards[i].name;
-  elements.prepend(createCard());}  
+  //linkCardItem = initialCards[i].link;
+  //nameCardItem = initialCards[i].name;
+  elements.prepend(createCard(initialCards[i].link, initialCards[i].name));}  
 };
 
 //кнопка Лайк карточки
@@ -52,9 +52,9 @@ export function deletElem (evt) {
 
 export function handleItemFormSubmit(evt) {
     evt.preventDefault(); 
-    linkCardItem = linkCard.value;
-    nameCardItem = nameCard.value;
-    elements.prepend(createCard());
+    //linkCardItem = linkCard.value;
+    //nameCardItem = nameCard.value;
+    elements.prepend(createCard(linkCard.value, nameCard.value));
     closePopup(popupItem);
     //evt.target.reset(); //сбрасывает поля формы
     //formCards.reset();

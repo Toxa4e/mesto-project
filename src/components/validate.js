@@ -1,5 +1,12 @@
 import { validationSettings } from "./units.js";
 
+export const enableValidation = (validationSettings) => {
+  const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
+  formList.forEach((formElement) => {
+    setEventListeners(formElement);
+  });
+};
+
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(validationSettings.inputErrorClass);
@@ -31,7 +38,7 @@ const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
   const buttonElement = formElement.querySelector(validationSettings.submitButtonSelector);
 
-  toggleButtonState(inputList, buttonElement);
+  //toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement);
@@ -40,25 +47,26 @@ const setEventListeners = (formElement) => {
   });
 }; 
 
-export const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
-  formList.forEach((formElement) => {
-    setEventListeners(formElement);
-  });
-};
-
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
-  })
+  });
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
+export const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
         buttonElement.disabled = true;
-    buttonElement.classList.add(validationSettings.inactiveButtonClass);
+        buttonElement.classList.add(validationSettings.inactiveButtonClass);
   } else {
         buttonElement.disabled = false;
-    buttonElement.classList.remove(validationSettings.inactiveButtonClass);
+        buttonElement.classList.remove(validationSettings.inactiveButtonClass);
   }
 }; 
+
+export function validButton (submitCard, formValid) {
+  if (formValid) {
+    submitCard.classList.add('form__submit_inactive');
+  } else {
+    submitCard.classList.remove('form__submit_inactive');
+  }
+};

@@ -12,6 +12,7 @@ export const formElement = document.querySelector('.form');  // Поиск фо�
 export const formProfile = document.forms.formProfile;
 export const nameImput = formProfile.elements.nameProfile;
 export const hobbiInput = formProfile.elements.hobbi;
+//export const submitProf = formProfile.elements.submitProf;
 //const nameImput = document.querySelector('#name-profile');
 //const hobbiInput = document.querySelector('#hobbi');
 export const profileTitle = document.querySelector('.profile__title');
@@ -22,6 +23,8 @@ export const formItem = document.querySelector('.form-item');  // Поиск ф�
 export const formCards = document.forms.formCards;
 export const nameCard = formCards.elements.nameCard;
 export const linkCard = formCards.elements.linkCard;
+export const submitCard = document.querySelector('.form-item__button');
+export const submitProf = document.querySelector('.form__button');
 //const nameCard = document.querySelector('#name-card');
 //const linkCard = document.querySelector('#link-card');
 //export let nameCardItem;
