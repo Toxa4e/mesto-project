@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" type="text/css">
+    <!--<link rel="stylesheet" href="./pages/index.css" type="text/css">-->
 </head>
 <body class="page">
     <header class="header">
-        <img src="./images/header__logo.svg" alt="логотип Mesto" class="header__logo">
+        <img src="<%=require('./images/header__logo.svg')%>" alt="логотип Mesto" class="header__logo">
     </header>
 
     <main>
@@ -41,11 +41,11 @@
 
                 <form action="#" class="form form-item" name="formCards" novalidate>
                     <!-- Элементы формы для получения данных об имени пользователе -->
-                    <input type="text" id="name-card" class="form-item__input" name="nameCard" minlength="2" maxlength="30" pattern="[a-zA-Zа-яА-ЯёЁ\-\s]+"
+                    <input type="text" id="name-card" class="form-item__input form__input" name="nameCard" minlength="2" maxlength="30" pattern="[a-zA-Zа-яА-ЯёЁ\-\s]+"
                     data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы." required placeholder="Название">
                     <span class="name-card-error form__input-error"></span> 
                     <!-- Элементы формы для информации о нём -->
-                    <input type="url" id="link-card" class="form-item__input" name="linkCard" required placeholder="Ссылка на картинку">
+                    <input type="url" id="link-card" class="form-item__input form__input" name="linkCard" required placeholder="Ссылка на картинку">
                     <span class="link-card-error form__input-error"></span> 
                     <button class="form__submit form-item__button" type="submit">Создать</button>
                 </form>
@@ -63,7 +63,7 @@
         </div>
 
         <section class="profile">
-            <img src="./images/profile__avatar.png" alt="Фотограффия Жак-Ив Кусто" class="profile__avatar">
+            <img src="<%=require('./images/profile__avatar.png')%>" alt="Фотограффия Жак-Ив Кусто" class="profile__avatar">
             <div class="profile__info">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <button class="profile__edit-button" type="button"></button>
@@ -90,8 +90,7 @@
     <footer class="footer">
         <p class="footer__title">&copy; 2020 Mesto Russia</p>
     </footer>
-    
-    <script src="index.js"></script>
+    <!--<script src="index.js"></script>-->
 
 </body>
 </html>
