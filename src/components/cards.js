@@ -1,23 +1,10 @@
-import { nameImput , hobbiInput ,  popupItem  , popupProfile , profileTitle , profileSubtitle , elements , elementTemplate , linkCard , nameCard} from "./const.js";
+import { nameImput , hobbiInput ,  popupItem  , popupProfile , profileTitle , profileSubtitle , elements , elementTemplate , linkCard , nameCard , requestFromServer} from "./const.js";
 //import { initialCards } from './initialCards.js';
 import { closePopup } from "./modal.js";
+import { sendingServerProfileInfo , sendingServerCardItem} from "./api.js";
 
-const initialCards = [
-    { name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
-    { name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
-    { name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
-    { name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
-    { name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
-    { name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'}
-  ];
-//let nameCardItem;
-//let linkCardItem;
+
+
 // тут создаем карточку и возвращаете её  
 function createCard(link, name) { 
   const elementElement = elementTemplate.querySelector('.element').cloneNode(true); //клонируем содержимое elementTemplate
@@ -29,12 +16,12 @@ function createCard(link, name) {
 };
 
 //создаем массив карточек
-export function addSixItem() {
-for (let i = 0; i < 6; i++) {
-  //linkCardItem = initialCards[i].link;
-  //nameCardItem = initialCards[i].name;
-  elements.prepend(createCard(initialCards[i].link, initialCards[i].name));}  
-};
+export function addServerItem(data) {
+  for (let i = 0; i < data.length; i++) {
+    //linkCardItem = initialCards[i].link;
+    //nameCardItem = initialCards[i].name;
+    elements.prepend(createCard(data[i].link, data[i].name));}  
+  };
 
 //кнопка Лайк карточки
 export function likeElem (evt) {
@@ -55,6 +42,10 @@ export function handleItemFormSubmit(evt) {
     //linkCardItem = linkCard.value;
     //nameCardItem = nameCard.value;
     elements.prepend(createCard(linkCard.value, nameCard.value));
+    sendingServerCardItem(requestFromServer, {
+      link: linkCard.value,
+      name: nameCard.value
+    });
     closePopup(popupItem);
     //evt.target.reset(); //сбрасывает поля формы
     //formCards.reset();
@@ -64,5 +55,10 @@ export function editProfInfo(evt) {
     evt.preventDefault();
     profileTitle.textContent = nameImput.value;
     profileSubtitle.textContent = hobbiInput.value;
+    //const { name, about } = evt.currentTarget.elements;
+    sendingServerProfileInfo(requestFromServer, {
+      name: nameImput.value,
+      about: hobbiInput.value
+    });
     closePopup(popupProfile);
 };

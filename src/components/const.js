@@ -17,6 +17,7 @@ export const hobbiInput = formProfile.elements.hobbi;
 //const hobbiInput = document.querySelector('#hobbi');
 export const profileTitle = document.querySelector('.profile__title');
 export const profileSubtitle = document.querySelector('.profile__subtitle');
+export const profileAvatar = document.querySelector('.profile__avatar');
 
 //  Находим форму добавления карточек в DOM
 export const formItem = document.querySelector('.form-item');  // Поиск формы добавления карточек по классу
@@ -39,3 +40,27 @@ export const elementTemplate = document.querySelector('#element').content; //п�
 
 //const closeAllPop = function () {closePopup(popupProfile);closePopup(popupItem);closePopup(popupImage);};
 //const popupOpened = document.querySelector('.popup_opened');
+
+export const initialCards = [
+  { name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
+  { name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
+  { name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
+  { name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
+  { name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
+  { name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'}
+];
+
+
+export const requestFromServer = {
+    fetchUrl: 'https://nomoreparties.co/v1/plus-cohort-19',
+    headers: {
+      authorization: 'c83b4442-43cd-4ffb-b808-c19eb2f5ff8a',
+      'Content-Type': 'application/json',
+    },
+};
