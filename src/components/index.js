@@ -11,7 +11,7 @@ import { requestFromServer } from './const.js';
 
 //Получаем карточки с сервера
 getServerCardsItem(requestFromServer);
-addServerItem(initialCards); //карточки с задания
+//addServerItem(initialCards); //карточки с задания
 //Получаем данные профиля с сервера
 getServerProfileInfo(requestFromServer);
 
