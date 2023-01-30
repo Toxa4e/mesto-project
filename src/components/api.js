@@ -11,7 +11,7 @@ export function getServerCardsItem(requestFromServer) {
     })
     .then((data) => {
       console.log(data.length);
-      console.log(data);
+      //console.log(data);
       addServerItem(data); // если мы попали в этот then, data — это объект
     })
 };
@@ -61,6 +61,20 @@ export function sendingServerCardItem(requestFromServer, dataInput) {
       name: dataInput.name,
       link: dataInput.link
     })
+  })
+  .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+    .then((data) => {
+      console.log(data);
+    })
+};
+
+//Удаление карточки с сервера
+export function deletServerCardItem(requestFromServer, idItem) {
+  return fetch(`${requestFromServer.fetchUrl}/cards/${idItem}`, {
+    method: 'DELETE',
+    headers: requestFromServer.headers,
   })
   .then((res) => {
       return res.json(); // возвращаем результат работы метода и идём в следующий then
