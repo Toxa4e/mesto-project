@@ -1,4 +1,4 @@
-import { popupProfile , popupItem , popupImage , pictureElement , figcaptionElement , formCards , nameImput , hobbiInput , profileTitle , profileSubtitle , submitCard , submitProf} from "./const.js";
+import { popupProfile , popupItem , popupImage , pictureElement , figcaptionElement , formCards , nameImput , hobbiInput , profileTitle , profileSubtitle , submitCard , submitProf , popupAvatar , submitAvatar , linkAvatar , formAvatar , profileImage} from "./const.js";
 import { validButton } from "./validate.js";
 
 /*function validButton (submitCard, formValid) {
@@ -8,6 +8,12 @@ import { validButton } from "./validate.js";
     submitCard.classList.remove('form__submit_inactive');
   }
 };*/
+
+export const openPopAvatar = function () {
+  openPopup(popupAvatar);
+  formAvatar.reset();
+  validButton(submitAvatar, true);
+};
 
 export const openPopProf = function () {
   nameImput.value = profileTitle.textContent;

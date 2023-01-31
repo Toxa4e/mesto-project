@@ -62,6 +62,21 @@
             </div>
         </div>
 
+        <div class="popup popup-avatar"> <!--модификатор popup_opened открывает форму добавления карточек-->
+            <div class="popup-avatar__container">
+                <!--Кнопка закрытия формы-->
+                <button class="popup__close" type="button"></button>
+                <h3 class="popup__title">Обновить аватар</h3>
+
+                <form action="#" class="form form-avatar" name="formAvatar" novalidate>
+                    <!-- Элементы формы для аватара -->
+                    <input type="url" id="link-avatar" class="form__input form-avatar__input" name="linkAvatar" required placeholder="Ссылка на картинку">
+                    <span class="link-avatar-error form__input-error"></span> 
+                    <button class="form__submit form-avatar__button" type="submit">Создать</button>
+                </form>
+            </div>
+        </div>
+
         <section class="profile">
             <div class="profile__avatar">
                 <img src="<%=require('./images/profile__avatar.png')%>" alt="Фотограффия Жак-Ив Кусто" class="profile__image">

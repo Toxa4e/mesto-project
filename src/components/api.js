@@ -1,5 +1,5 @@
 import { addServerItem } from "./cards.js";
-import { profileTitle , profileSubtitle , profileAvatar} from "./const.js";
+import { profileTitle , profileSubtitle , profileImage} from "./const.js";
 
 //-----------------------------------------
 export function loadGetServerData(setting){
@@ -9,8 +9,8 @@ export function loadGetServerData(setting){
     console.log(cards);
     profileTitle.textContent = profile.name;
     profileSubtitle.textContent = profile.about;
-    profileAvatar.src = profile.avatar;
-    profileAvatar.alt = profile.name;
+    profileImage.src = profile.avatar;
+    profileImage.alt = profile.name;
     addServerItem(cards, profile);
   }); 
 }
