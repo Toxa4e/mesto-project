@@ -118,7 +118,8 @@ export function deletLikeServerCardItem(requestFromServer, idItem) {
 };
 
 //Изменение аватара
-export function setAvatarProfile(requestFromServer, idItem) {
+export function setAvatarProfile(requestFromServer, idItem, submitButtonBefore, submitButtonAfter) {
+  renderLoading(true, submitButtonBefore, submitButtonAfter);
   return fetch(`${requestFromServer.fetchUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: requestFromServer.headers,
@@ -126,10 +127,39 @@ export function setAvatarProfile(requestFromServer, idItem) {
       avatar: idItem  //без .link
     })
   })
-  .then((res) => {
+  /*.then((res) => {
       return res.json(); // возвращаем результат работы метода и идём в следующий then
     })
     .then((data) => {
       console.log(data);
-    })
+  })*/
+  .then((res) => {
+    if (res.ok) {
+      return res.json(); // возвращаем вызов метода json
+    }
+    // иначе отклоняем промис, чтобы перейти в catch
+    return Promise.reject(res.status);
+  })
+  .then((res) => {
+    // выведите res в консоль
+  console.log(res);
+  })
+  .catch((err) => {
+    // выведите в консоль сообщение: `Ошибка: ${err}`
+  console.log(`Ошибка: ${err}`);
+  })
+.finally(() => {
+  renderLoading(false, submitButtonBefore, submitButtonAfter); // вызываем с true — это покажет лоадер
+});
+};
+
+export function renderLoading(isLoading, submitButtonBefore, submitButtonAfter) {
+  //const submit = submitButton.textContent;
+  //const textButton = submit.textContent;
+  //console.log(submit);
+  if (isLoading) {
+    submitButtonAfter.textContent = 'Сохранение...';
+  } else {
+    submitButtonAfter.textContent = submitButtonBefore;
+  }
 };

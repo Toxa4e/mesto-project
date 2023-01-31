@@ -104,6 +104,9 @@ export function edidAvatar(evt) {
   evt.preventDefault();  
   profileImage.src = linkAvatar.value;
   //console.log(profileImage);
-  setAvatarProfile(requestFromServer, linkAvatar.value);
+  const submit = evt.target.querySelector('.form__submit').textContent;
+  //console.log(evt.target.querySelector('.form__submit'));
+  setAvatarProfile(requestFromServer, linkAvatar.value, submit, evt.target.querySelector('.form__submit'));
+  //console.log(evt.target.closest('form__submit').textContent);
   closePopup(popupAvatar);
 }
