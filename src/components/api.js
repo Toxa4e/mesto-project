@@ -97,3 +97,17 @@ export function likeServerCardItem(requestFromServer, idItem) {
       console.log(data);
     })
 };
+
+//Удаление Лайка карточки с сервера
+export function deletLikeServerCardItem(requestFromServer, idItem) {
+  return fetch(`${requestFromServer.fetchUrl}/cards/likes/${idItem}`, {
+    method: 'DELETE',
+    headers: requestFromServer.headers,
+  })
+  .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+    .then((data) => {
+      console.log(data);
+    })
+};
