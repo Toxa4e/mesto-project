@@ -117,4 +117,16 @@ export function deletLikeServerCardItem(requestFromServer, idItem) {
     })
 };
 
-//PATCH https://nomoreparties.co/v1/cohortId/users/me/avatar 
+//Изменение аватара
+export function editAvatarProfile(requestFromServer, idItem) {
+  return fetch(`${requestFromServer.fetchUrl}/users/me/${idItem}`, {
+    method: 'PATCH',
+    headers: requestFromServer.headers,
+  })
+  .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+    .then((data) => {
+      console.log(data);
+    })
+};
