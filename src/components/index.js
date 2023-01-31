@@ -6,7 +6,7 @@ import { addServerItem ,likeElem , deletElem , handleItemFormSubmit , editProfIn
 import { enableValidation } from './validate.js';
 import { validationSettings } from './units.js';
 
-import { getServerCardsItem , getServerProfileInfo /*, sendingServerProfileInfo*/} from './api.js';
+import { getServerCardsItem , getServerProfileInfo , deletServerCardItem/*, sendingServerProfileInfo*/} from './api.js';
 import { requestFromServer } from './const.js';
 
 //Получаем карточки с сервера
@@ -15,11 +15,14 @@ getServerCardsItem(requestFromServer);
 //Получаем данные профиля с сервера
 getServerProfileInfo(requestFromServer);
 
+//deletServerCardItem(requestFromServer, "63d7b9609432906aa4007d92");
+
 //addServerItem();
 profileEditButton.addEventListener('click', openPopProf);
 profileButton.addEventListener('click', openPopItem);
 elements.addEventListener('click', openPopElem);
 elements.addEventListener('click', likeElem);
+//-------------
 elements.addEventListener('click', deletElem);
 
 formItem.addEventListener('submit', handleItemFormSubmit); 
