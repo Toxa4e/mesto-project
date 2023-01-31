@@ -1,7 +1,7 @@
 import { nameImput , hobbiInput ,  popupItem  , popupProfile , profileTitle , profileSubtitle , elements , elementTemplate , linkCard , nameCard , requestFromServer , popupAvatar , submitAvatar , linkAvatar , formAvatar , profileImage} from "./const.js";
 //import { initialCards } from './initialCards.js';
 import { closePopup } from "./modal.js";
-import { sendingServerProfileInfo , sendingServerCardItem , deletServerCardItem , likeServerCardItem , deletLikeServerCardItem , myNameProfile} from "./api.js";
+import { sendingServerProfileInfo , sendingServerCardItem , deletServerCardItem , likeServerCardItem , deletLikeServerCardItem , myNameProfile , setAvatarProfile} from "./api.js";
 
 
 
@@ -104,6 +104,6 @@ export function edidAvatar(evt) {
   evt.preventDefault();  
   profileImage.src = linkAvatar.value;
   //console.log(profileImage);
-  //editAvatarProfile(requestFromServer, idItem);
+  setAvatarProfile(requestFromServer, linkAvatar.value);
   closePopup(popupAvatar);
 }

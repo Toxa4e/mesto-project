@@ -118,10 +118,13 @@ export function deletLikeServerCardItem(requestFromServer, idItem) {
 };
 
 //Изменение аватара
-export function editAvatarProfile(requestFromServer, idItem) {
-  return fetch(`${requestFromServer.fetchUrl}/users/me/${idItem}`, {
+export function setAvatarProfile(requestFromServer, idItem) {
+  return fetch(`${requestFromServer.fetchUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: requestFromServer.headers,
+    body: JSON.stringify({
+      avatar: idItem  //без .link
+    })
   })
   .then((res) => {
       return res.json(); // возвращаем результат работы метода и идём в следующий then
