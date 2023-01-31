@@ -1,6 +1,22 @@
 import { addServerItem } from "./cards.js";
 import { profileTitle , profileSubtitle , profileAvatar} from "./const.js";
 
+//-----------------------------------------
+export function loadGetServerData(setting){
+  Promise.all([getServerProfileInfo(setting), getServerCardsItem(setting)])
+  .then(([profile, cards]) => {
+    console.log(profile);
+    console.log(cards);
+    profileTitle.textContent = profile.name;
+    profileSubtitle.textContent = profile.about;
+    profileAvatar.src = profile.avatar;
+    profileAvatar.alt = profile.name;
+    addServerItem(cards, profile);
+  }); 
+}
+//---------------------------------------------
+
+
 //Получение карточек с сервера
 export function getServerCardsItem(requestFromServer) {
   return fetch(`${requestFromServer.fetchUrl}/cards`, {
@@ -8,11 +24,6 @@ export function getServerCardsItem(requestFromServer) {
   })
   .then((res) => {
       return res.json(); // возвращаем результат работы метода и идём в следующий then
-    })
-    .then((data) => {
-      console.log(data.length);
-      console.log(data);
-      addServerItem(data); // если мы попали в этот then, data — это объект
     })
 };
 
@@ -25,14 +36,8 @@ export function getServerProfileInfo(requestFromServer) {
   .then((res) => {
       return res.json(); // возвращаем результат работы метода и идём в следующий then
     })
-    .then((data) => {
-      //console.log(data);
-      profileTitle.textContent = data.name;
-      profileSubtitle.textContent = data.about;
-      profileAvatar.src = data.avatar;
-      profileAvatar.alt = data.name;
-    })
 };
+
 
 //Отправка данных с модального окна о пользователе
 export function sendingServerProfileInfo(requestFromServer, dataInput) {
@@ -111,3 +116,5 @@ export function deletLikeServerCardItem(requestFromServer, idItem) {
       console.log(data);
     })
 };
+
+//PATCH https://nomoreparties.co/v1/cohortId/users/me/avatar 

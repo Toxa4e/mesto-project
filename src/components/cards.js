@@ -1,7 +1,7 @@
 import { nameImput , hobbiInput ,  popupItem  , popupProfile , profileTitle , profileSubtitle , elements , elementTemplate , linkCard , nameCard , requestFromServer} from "./const.js";
 //import { initialCards } from './initialCards.js';
 import { closePopup } from "./modal.js";
-import { sendingServerProfileInfo , sendingServerCardItem , deletServerCardItem , likeServerCardItem , deletLikeServerCardItem} from "./api.js";
+import { sendingServerProfileInfo , sendingServerCardItem , deletServerCardItem , likeServerCardItem , deletLikeServerCardItem , myNameProfile} from "./api.js";
 
 
 
@@ -18,14 +18,12 @@ function createCard(link, name) {
 //--------------------------------------------------------------
 
 //создаем массив карточек
-export function addServerItem(data) {
+export function addServerItem(data, myNameProfile) {
   for (let i = 0; i < data.length; i++) {
     elements.prepend(createCard(data[i].link, data[i].name));
     deletButtonElementDelet(data[i].owner.name, data[i]._id);
-    //console.log(data[i].likes);
-    //console.log(data[i].likes.length);
     numberLikes (data[i].likes.length);
-    likeButonServer(data[i].likes, data[i].owner.name);
+    likeButonServer(data[i].likes, myNameProfile.name);
   }  
 };
 
@@ -33,17 +31,13 @@ function deletButtonElementDelet(data, id) {  //убирает кнопку уд
   const deletButtonItem = document.querySelector('.element__del-button');
   deletButtonItem.closest('.element').setAttribute("card-id" ,id);
   if (data !== profileTitle.textContent){
-    //console.log(data[i].owner.name);
-    //console.log(deletButtonItem);
     deletButtonItem.remove();
   } 
 };
 
-function likeButonServer(data, ownerName) {
+function likeButonServer(data, myNameProfile) {
   for (let i = 0; i < data.length; i++) {
-    if (data[i].name === ownerName) {
-      //const likeActive = document.querySelector('.element__button');
-      //likeActive.classList.add('element__button_active');
+    if (data[i].name === myNameProfile) {
       document.querySelector('.element__button').classList.add('element__button_active');
       return;
     }
@@ -56,23 +50,18 @@ function numberLikes (data) {
     spanLike.textContent = data;
   }
 };
-//--------------------------------------------------------------------
+
 //кнопка Лайк карточки c Отправкой
 export function likeElem (evt) {
   if (evt.target.closest('.element__button')) {
-    console.log(evt.target.closest('.element').getAttribute("card-id"));
-    //const spanLike = evt.target.closest('.element__like-number');
-    //console.log('click');    
+    //console.log(evt.target.closest('.element').getAttribute("card-id"));
     let likeNumber = evt.target.closest('.element__button').nextElementSibling.textContent;
-    console.log(likeNumber + 1);
 
     if (!evt.target.classList.contains('element__button_active')) {
-      console.log('+1');
       evt.target.classList.add('element__button_active');
       evt.target.closest('.element__button').nextElementSibling.textContent = Number(likeNumber) + 1;
       likeServerCardItem(requestFromServer, evt.target.closest('.element').getAttribute("card-id"));
     } else {
-      console.log('-1');
       evt.target.classList.remove('element__button_active');
       evt.target.closest('.element__button').nextElementSibling.textContent = Number(likeNumber) - 1;
       deletLikeServerCardItem(requestFromServer, evt.target.closest('.element').getAttribute("card-id"));
@@ -84,8 +73,7 @@ export function likeElem (evt) {
 //кнопка Удалить карточку
 export function deletElem (evt) {
     if (evt.target.closest('.element__del-button')) {
-      deletServerCardItem(requestFromServer, evt.target.closest('.element').getAttribute("card-id"))
-      //console.log(evt.target.closest('.element').id);
+      deletServerCardItem(requestFromServer, evt.target.closest('.element').getAttribute("card-id"));
       evt.target.closest('.element').remove();      
     }
 };

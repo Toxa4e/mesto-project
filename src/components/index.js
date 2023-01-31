@@ -6,16 +6,15 @@ import { addServerItem ,likeElem , deletElem , handleItemFormSubmit , editProfIn
 import { enableValidation } from './validate.js';
 import { validationSettings } from './units.js';
 
-import { getServerCardsItem , getServerProfileInfo , deletServerCardItem/*, sendingServerProfileInfo*/} from './api.js';
+import { getServerCardsItem , getServerProfileInfo , deletServerCardItem/*, sendingServerProfileInfo*/ , loadGetServerData} from './api.js';
 import { requestFromServer } from './const.js';
 
 //Получаем карточки с сервера
-getServerCardsItem(requestFromServer);
+//getServerCardsItem(requestFromServer);
 //addServerItem(initialCards); //карточки с задания
 //Получаем данные профиля с сервера
-getServerProfileInfo(requestFromServer);
-
-//deletServerCardItem(requestFromServer, "63d7b9609432906aa4007d92");
+//getServerProfileInfo(requestFromServer);
+loadGetServerData (requestFromServer);
 
 //addServerItem();
 profileEditButton.addEventListener('click', openPopProf);
