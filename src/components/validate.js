@@ -1,5 +1,3 @@
-import { validationSettings } from "./units.js";
-
 export const enableValidation = (validationSettings) => {
   const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
   formList.forEach((formElement) => {

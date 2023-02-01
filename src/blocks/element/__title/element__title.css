@@ -1,6 +1,7 @@
 .element__title {
+    grid-area: title;
     margin: 0;
-    max-width: 190px;
+    max-width: 185px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

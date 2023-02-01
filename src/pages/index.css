@@ -35,6 +35,11 @@
 /* блок формы popup-image */
 @import url('../blocks/popup-image/popup-image.css');
 @import url('../blocks/popup-image/__container/popup-image__container.css');
+
+/* блок формы popup-avatar */
+@import url('../blocks/popup-avatar/popup-avatar.css');
+@import url('../blocks/popup-avatar/__container/popup-avatar__container.css');
+
 /* figure */
 @import url('../blocks/figure/figure.css');
 @import url('../blocks/figure/__picture/figure__picture.css');
@@ -43,6 +48,7 @@
 /* profile */
 @import url('../blocks/profile/profile.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
+@import url('../blocks/profile/__image/profile__image.css');
 @import url('../blocks/profile/__button/profile__button.css');
 @import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__title/profile__title.css');
@@ -57,6 +63,7 @@
 @import url('../blocks/element/__container/element__container.css');
 @import url('../blocks/element/__title/element__title.css');
 @import url('../blocks/element/__button/element__button.css');
+@import url('../blocks/element/__like-number/element__like-number.css');
 @import url('../blocks/element/__button/_active/element__button_active.css');
 
 /* footer */
