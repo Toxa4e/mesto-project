@@ -81,10 +81,11 @@ export function deletElem (evt) {
 export function handleItemFormSubmit(evt) {
     evt.preventDefault(); 
     elements.prepend(createCard(linkCard.value, nameCard.value));
+    const submit = evt.target.querySelector('.form__submit').textContent;
     sendingServerCardItem(requestFromServer, {
       link: linkCard.value,
       name: nameCard.value
-    });    
+    }, submit, evt.target.querySelector('.form__submit'));    
     //elements.addEventListener('click', deletElem());
     closePopup(popupItem);
 };
@@ -93,10 +94,11 @@ export function editProfInfo(evt) {
     evt.preventDefault();
     profileTitle.textContent = nameImput.value;
     profileSubtitle.textContent = hobbiInput.value;
+    const submit = evt.target.querySelector('.form__submit').textContent;
     sendingServerProfileInfo(requestFromServer, {
       name: nameImput.value,
       about: hobbiInput.value
-    });
+    }, submit, evt.target.querySelector('.form__submit'));
     closePopup(popupProfile);
 };
 
@@ -106,6 +108,7 @@ export function edidAvatar(evt) {
   //console.log(profileImage);
   const submit = evt.target.querySelector('.form__submit').textContent;
   //console.log(evt.target.querySelector('.form__submit'));
+  //submitButtonBefore(evt);
   setAvatarProfile(requestFromServer, linkAvatar.value, submit, evt.target.querySelector('.form__submit'));
   //console.log(evt.target.closest('form__submit').textContent);
   closePopup(popupAvatar);

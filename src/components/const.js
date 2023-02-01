@@ -72,3 +72,11 @@ export const requestFromServer = {
       'Content-Type': 'application/json',
     },
 };
+
+export const serverResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(res.status, res.statusText);
+  }
+};

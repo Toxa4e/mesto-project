@@ -1,14 +1,6 @@
 import { popupProfile , popupItem , popupImage , pictureElement , figcaptionElement , formCards , nameImput , hobbiInput , profileTitle , profileSubtitle , submitCard , submitProf , popupAvatar , submitAvatar , linkAvatar , formAvatar , profileImage} from "./const.js";
 import { validButton } from "./validate.js";
 
-/*function validButton (submitCard, formValid) {
-  if (formValid) {
-    submitCard.classList.add('form__submit_inactive');
-  } else {
-    submitCard.classList.remove('form__submit_inactive');
-  }
-};*/
-
 export const openPopAvatar = function () {
   openPopup(popupAvatar);
   formAvatar.reset();
@@ -26,7 +18,6 @@ export const openPopItem = function () {
   openPopup(popupItem);
   formCards.reset();
   validButton(submitCard, true);
-  /*toggleButtonState(formItem, submitCard);*/
 };
 
 //открытие Попапа формы
@@ -34,9 +25,6 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   popup.addEventListener('click', closeListenerMouse);
   document.addEventListener('keyup', closeListenerButton);
-  //if (popup === popupItem) {
-  //  formCards.reset();
-  //}
 };
 
 //открытие Попапа картинки
@@ -67,12 +55,17 @@ function closeListenerMouse (evt) {
 
 //закрытие на кнопку Esc
 function closeListenerButton (evt) {
-  //if (evt.keyCode === 27) {
     if (evt.key === 'Escape') {
-    //closeAllPop();
-    //closePopup(popup);
-    //console.log('Esce');
     const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
+  }
+};
+
+
+export function renderLoading(isLoading, submitButtonBefore, submitButtonAfter) {
+  if (isLoading) {
+    submitButtonAfter.textContent = 'Сохранение...';
+  } else {
+    submitButtonAfter.textContent = submitButtonBefore;
   }
 };
