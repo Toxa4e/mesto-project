@@ -17,15 +17,13 @@ profileButton.addEventListener('click', openPopItem);
 profileAvatar.addEventListener('click', openPopAvatar);
 elements.addEventListener('click', openPopElem);
 elements.addEventListener('click', likeElem);
-//-------------
 elements.addEventListener('click', deletElem);
 
+//слушатель на Submit попапов
 formItem.addEventListener('submit', handleItemFormSubmit); 
-
-//nameImput.value = profileTitle.textContent;
-//hobbiInput.value = profileSubtitle.textContent; 
 formElement.addEventListener('submit', editProfInfo); 
 formAvatarProf.addEventListener('submit', edidAvatar); 
 
+//инициировать валидацию
 enableValidation(validationSettings);
 

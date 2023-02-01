@@ -1,5 +1,4 @@
 import { nameImput , hobbiInput ,  popupItem  , popupProfile , profileTitle , profileSubtitle , elements , elementTemplate , linkCard , nameCard , requestFromServer , popupAvatar , linkAvatar , profileImage} from "./const.js";
-//import { initialCards } from './initialCards.js';
 import { closePopup } from "./modal.js";
 import { sendingServerProfileInfo , sendingServerCardItem , deletServerCardItem , likeServerCardItem , deletLikeServerCardItem , setAvatarProfile} from "./api.js";
 
@@ -22,19 +21,14 @@ export function createCard(link, name, id) {
 export function addServerItem(data, myNameProfile) {
   for (let i = 0; i < data.length; i++) {
     elements.prepend(createCard(data[i].link, data[i].name, data[i]._id));
-    deletButtonElementDelet(data[i].owner.name/*, data[i]._id*/);
+    deletButtonElementDelet(data[i].owner.name);
     numberLikes (data[i].likes.length);
-
     likeButonServer(data[i].likes, myNameProfile.name);
   }  
 };
 
-function deletButtonElementDelet(data/*, id*/) {  //убирает кнопку удаления для карточек от других пользователей
-  //const deletButtonItem = document.querySelector('.element__del-button');
-  //deletButtonItem.closest('.element').setAttribute("card-id" ,id);
-  //document.querySelector('.element__del-button').closest('.element').setAttribute("card-id" ,id);
+function deletButtonElementDelet(data) {
   if (data !== profileTitle.textContent){
-    //deletButtonItem.remove();
     document.querySelector('.element__del-button').remove();
   } 
 };
@@ -86,18 +80,11 @@ export function deletElem (evt) {
 //Форма создания карточек
 export function handleItemFormSubmit(evt) {
     evt.preventDefault(); 
-    /*elements.prepend(createCard(linkCard.value, nameCard.value));
     const submit = evt.target.querySelector('.form__submit').textContent;
     sendingServerCardItem(requestFromServer, {
       link: linkCard.value,
       name: nameCard.value
-    }, submit, evt.target.querySelector('.form__submit')); */ 
-    const submit = evt.target.querySelector('.form__submit').textContent;
-    sendingServerCardItem(requestFromServer, {
-      link: linkCard.value,
-      name: nameCard.value
-    }, submit, evt.target.querySelector('.form__submit')); 
-    //elements.prepend(createCard(linkCard.value, nameCard.value, res._id));
+    }, submit, evt.target.querySelector('.form__submit'));
     closePopup(popupItem);
 };
   

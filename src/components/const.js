@@ -14,9 +14,6 @@ export const formElement = document.querySelector('.form');  // Поиск фо�
 export const formProfile = document.forms.formProfile;
 export const nameImput = formProfile.elements.nameProfile;
 export const hobbiInput = formProfile.elements.hobbi;
-//export const submitProf = formProfile.elements.submitProf;
-//const nameImput = document.querySelector('#name-profile');
-//const hobbiInput = document.querySelector('#hobbi');
 export const profileTitle = document.querySelector('.profile__title');
 export const profileSubtitle = document.querySelector('.profile__subtitle');
 export const profileImage = document.querySelector('.profile__image');
@@ -34,36 +31,12 @@ export const formAvatarProf = document.querySelector('.form-avatar');  // Пои
 export const formAvatar = document.forms.formAvatar;
 export const linkAvatar = formAvatar.elements.linkAvatar;
 export const submitAvatar = document.querySelector('.form-avatar__button');
-//const nameCard = document.querySelector('#name-card');
-//const linkCard = document.querySelector('#link-card');
-//export let nameCardItem;
-//export let linkCardItem;
-
 //открытие картинки по нажатию на неё
 export const popupImage = document.querySelector('.popup-image');
 export const pictureElement = document.querySelector('.figure__picture');
 export const figcaptionElement = document.querySelector('.figure__figcaption');
 
 export const elementTemplate = document.querySelector('#element').content; //получаем содержимое template
-
-//const closeAllPop = function () {closePopup(popupProfile);closePopup(popupItem);closePopup(popupImage);};
-//const popupOpened = document.querySelector('.popup_opened');
-
-export const initialCards = [
-  { name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
-  { name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
-  { name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
-  { name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
-  { name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
-  { name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'}
-];
-
 
 export const requestFromServer = {
     fetchUrl: 'https://nomoreparties.co/v1/plus-cohort-19',

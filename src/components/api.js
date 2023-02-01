@@ -52,23 +52,6 @@ export function sendingServerProfileInfo(requestFromServer, dataInput, submitBut
   .finally(() => {renderLoading(false, submitButtonBefore, submitButtonAfter);});
 };
 
-/*//Отправка данных с Добавление новой карточки
-export function sendingServerCardItem(requestFromServer, dataInput, submitButtonBefore, submitButtonAfter) {
-  renderLoading(true, submitButtonBefore, submitButtonAfter);
-  return fetch(`${requestFromServer.fetchUrl}/cards`, {
-    method: 'POST',
-    headers: requestFromServer.headers,
-    body: JSON.stringify({
-      name: dataInput.name,
-      link: dataInput.link
-    })
-  })
-  .then(serverResponse)
-  .then((res) => {console.log(res);})
-  .catch((err) => {console.log(`Ошибка: ${err}`);})
-  .finally(() => {renderLoading(false, submitButtonBefore, submitButtonAfter);});
-};*/
-
 //Отправка данных с Добавление новой карточки
 export function sendingServerCardItem(requestFromServer, dataInput, submitButtonBefore, submitButtonAfter) {
   renderLoading(true, submitButtonBefore, submitButtonAfter);
@@ -82,7 +65,7 @@ export function sendingServerCardItem(requestFromServer, dataInput, submitButton
   })
   .then(serverResponse)
   .then((res) => {console.log(res);
-    elements.prepend(createCard(res.link, res.name, res._id));
+    elements.prepend(createCard(res.link, res.name, res._id)); //после получения ответа создаем карточку
   })
   .catch((err) => {console.log(`Ошибка: ${err}`);})
   .finally(() => {renderLoading(false, submitButtonBefore, submitButtonAfter);});
