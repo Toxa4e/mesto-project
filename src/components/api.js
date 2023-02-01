@@ -1,41 +1,79 @@
 import { addServerItem , createCard} from "./cards.js";
-import { profileTitle , profileSubtitle , profileImage , serverResponse , elements} from "./const.js";
+import { profileTitle , profileSubtitle , profileImage , elements} from "./const.js";
 import { renderLoading } from "./modal.js";
+import { serverResponse } from "./units.js";
+import { requestFromServer } from "./const.js";
 
 //-----------------------------------------
 export function loadGetServerData(setting){
-  Promise.all([getServerProfileInfo(setting), getServerCardsItem(setting)])
-  .then(([profile, cards]) => {
-    console.log(profile);
-    console.log(cards);
-    profileTitle.textContent = profile.name;
-    profileSubtitle.textContent = profile.about;
-    profileImage.src = profile.avatar;
-    profileImage.alt = profile.name;
-    addServerItem(cards, profile);
-  }); 
-}
+  return Promise.all([getServerProfileInfo(setting), getServerCardsItem(setting)])
+};
+
+function request(url, options) {
+  const compileLink = `${requestFromServer.fetchUrl}${url}`;
+  return fetch(compileLink, options).then(serverResponse);
+};
+//Получение карточек с сервера
+const getServerCardsItem = () => request(`/cards`, {headers: requestFromServer.headers});
+//Получение информации пользователя
+const getServerProfileInfo = () => request(`/users/me`, {headers: requestFromServer.headers});
+
+//Отправка данных с модального окна о пользователе
+export const sendingServerProfileInfo = (nameImput, hobbiInput) => request(`/users/me`, {
+  method: 'PATCH',
+  headers: requestFromServer.headers,
+  body: JSON.stringify({
+    name: nameImput,
+    about: hobbiInput 
+  })
+});
+
+//Изменение аватара
+export const setAvatarProfile = (idItem) => request(`/users/me/avatar`, {
+  method: 'PATCH',
+  headers: requestFromServer.headers,
+  body: JSON.stringify({
+    avatar: idItem  //без .link
+  })
+});
+
+//Отправка данных с Добавление новой карточки
+export const sendingServerCardItem = (linkCard, nameCard) => request(`/cards`, {
+  method: 'POST',
+    headers: requestFromServer.headers,
+    body: JSON.stringify({
+      name: nameCard,
+      link: linkCard
+  })
+});
+
+//Удаление карточки с сервера
+export const deletServerCardItem = (idItem) => request(`/cards/${idItem}`, {
+    method: 'DELETE',
+    headers: requestFromServer.headers,
+  });
+
 //---------------------------------------------
 
 
-//Получение карточек с сервера
+/*//Получение карточек с сервера
 export function getServerCardsItem(requestFromServer) {
   return fetch(`${requestFromServer.fetchUrl}/cards`, {
     headers: requestFromServer.headers,
   })
   .then(serverResponse)
-};
+};*/
 
-//Получение информации пользователя
+/*//Получение информации пользователя
 export function getServerProfileInfo(requestFromServer) {
   return fetch(`${requestFromServer.fetchUrl}/users/me`, {
     headers: requestFromServer.headers,
   })
   .then(serverResponse)
-};
+};*/
 
 
-//Отправка данных с модального окна о пользователе
+/*//Отправка данных с модального окна о пользователе
 export function sendingServerProfileInfo(requestFromServer, dataInput, submitButtonBefore, submitButtonAfter) {
   renderLoading(true, submitButtonBefore, submitButtonAfter);
   return fetch(`${requestFromServer.fetchUrl}/users/me`, {
@@ -50,9 +88,9 @@ export function sendingServerProfileInfo(requestFromServer, dataInput, submitBut
   .then((res) => {console.log(res); })
   .catch((err) => {console.log(`Ошибка: ${err}`);})
   .finally(() => {renderLoading(false, submitButtonBefore, submitButtonAfter);});
-};
+};*/
 
-//Отправка данных с Добавление новой карточки
+/*//Отправка данных с Добавление новой карточки
 export function sendingServerCardItem(requestFromServer, dataInput, submitButtonBefore, submitButtonAfter) {
   renderLoading(true, submitButtonBefore, submitButtonAfter);
   return fetch(`${requestFromServer.fetchUrl}/cards`, {
@@ -69,10 +107,10 @@ export function sendingServerCardItem(requestFromServer, dataInput, submitButton
   })
   .catch((err) => {console.log(`Ошибка: ${err}`);})
   .finally(() => {renderLoading(false, submitButtonBefore, submitButtonAfter);});
-};
+};*/
 
 //Удаление карточки с сервера
-export function deletServerCardItem(requestFromServer, idItem) {
+/*export function deletServerCardItem(requestFromServer, idItem) {
   return fetch(`${requestFromServer.fetchUrl}/cards/${idItem}`, {
     method: 'DELETE',
     headers: requestFromServer.headers,
@@ -80,7 +118,7 @@ export function deletServerCardItem(requestFromServer, idItem) {
   .then(serverResponse)
   .then((res) => {console.log(res);})
   .catch((err) => {console.log(`Ошибка: ${err}`);})
-};
+};*/
 
 //Лайк карточки с сервера
 export function likeServerCardItem(requestFromServer, idItem) {
@@ -104,7 +142,7 @@ export function deletLikeServerCardItem(requestFromServer, idItem) {
   .catch((err) => {console.log(`Ошибка: ${err}`);})
 };
 
-//Изменение аватара
+/*//Изменение аватара
 export function setAvatarProfile(requestFromServer, idItem, submitButtonBefore, submitButtonAfter) {
   renderLoading(true, submitButtonBefore, submitButtonAfter);
   return fetch(`${requestFromServer.fetchUrl}/users/me/avatar`, {
@@ -118,4 +156,4 @@ export function setAvatarProfile(requestFromServer, idItem, submitButtonBefore, 
   .then((res) => {console.log(res);})
   .catch((err) => {console.log(`Ошибка: ${err}`);})
   .finally(() => {renderLoading(false, submitButtonBefore, submitButtonAfter);});
-};
+};*/

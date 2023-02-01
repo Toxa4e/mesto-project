@@ -36,7 +36,15 @@ const setEventListeners = (formElement, validationSettings) => {
   const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
   const buttonElement = formElement.querySelector(validationSettings.submitButtonSelector);
 
-  //toggleButtonState(inputList, buttonElement);
+  // деактивируем кнопку при 1й загрузке сайта
+  toggleButtonState(inputList, buttonElement, validationSettings);
+  //Добавил обработчик reset
+  formElement.addEventListener('reset', () => {
+    setTimeout(() => {
+     toggleButtonState(inputList, buttonElement, validationSettings);
+    }, 0);
+  });
+
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement, validationSettings);
@@ -61,7 +69,7 @@ export const toggleButtonState = (inputList, buttonElement, validationSettings) 
   }
 }; 
 
-export function validButton (submitCard, formValid) {
+/*export function validButton (submitCard, formValid) {
   if (formValid) {
     submitCard.classList.add('form__submit_inactive');
     submitCard.disabled = true;
@@ -69,4 +77,4 @@ export function validButton (submitCard, formValid) {
     submitCard.classList.remove('form__submit_inactive');
     submitCard.disabled = false;
   }
-};
+};*/
