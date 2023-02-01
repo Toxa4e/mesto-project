@@ -1,4 +1,4 @@
-import { popupProfile , popupItem , popupImage , pictureElement , figcaptionElement , formCards , nameImput , hobbiInput , profileTitle , profileSubtitle , submitCard , submitProf , popupAvatar , submitAvatar , linkAvatar , formAvatar , profileImage} from "./const.js";
+import { popupProfile , popupItem , popupImage , pictureElement , figcaptionElement , formCards , nameImput , hobbiInput , profileTitle , profileSubtitle , submitCard , submitProf , popupAvatar , submitAvatar , formAvatar} from "./const.js";
 import { validButton } from "./validate.js";
 
 export const openPopAvatar = function () {

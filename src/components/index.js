@@ -1,19 +1,14 @@
 import '../pages/index.css'; // добавьте импорт главного файла стилей
 
-import { profileEditButton , profileButton , nameImput , hobbiInput , profileSubtitle , profileTitle , elements , formItem , formElement , initialCards , profileImage , profileAvatar , formAvatarProf} from './const';
+import { profileEditButton , profileButton , elements , formItem , formElement , profileAvatar , formAvatarProf , requestFromServer } from './const';
 import { openPopProf , openPopItem , openPopElem , openPopAvatar} from './modal.js';
-import { addServerItem ,likeElem , deletElem , handleItemFormSubmit , editProfInfo , edidAvatar} from './cards.js';
+import { likeElem , deletElem , handleItemFormSubmit , editProfInfo , edidAvatar} from './cards.js';
 import { enableValidation } from './validate.js';
 import { validationSettings } from './units.js';
-
-import { getServerCardsItem , getServerProfileInfo , deletServerCardItem/*, sendingServerProfileInfo*/ , loadGetServerData} from './api.js';
-import { requestFromServer } from './const.js';
+import { loadGetServerData} from './api.js';
 
 //Получаем карточки с сервера
-//getServerCardsItem(requestFromServer);
-//addServerItem(initialCards); //карточки с задания
 //Получаем данные профиля с сервера
-//getServerProfileInfo(requestFromServer);
 loadGetServerData (requestFromServer);
 
 //addServerItem();

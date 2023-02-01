@@ -1,17 +1,18 @@
-import { nameImput , hobbiInput ,  popupItem  , popupProfile , profileTitle , profileSubtitle , elements , elementTemplate , linkCard , nameCard , requestFromServer , popupAvatar , submitAvatar , linkAvatar , formAvatar , profileImage} from "./const.js";
+import { nameImput , hobbiInput ,  popupItem  , popupProfile , profileTitle , profileSubtitle , elements , elementTemplate , linkCard , nameCard , requestFromServer , popupAvatar , linkAvatar , profileImage} from "./const.js";
 //import { initialCards } from './initialCards.js';
 import { closePopup } from "./modal.js";
-import { sendingServerProfileInfo , sendingServerCardItem , deletServerCardItem , likeServerCardItem , deletLikeServerCardItem , myNameProfile , setAvatarProfile} from "./api.js";
+import { sendingServerProfileInfo , sendingServerCardItem , deletServerCardItem , likeServerCardItem , deletLikeServerCardItem , setAvatarProfile} from "./api.js";
 
 
 
 // тут создаем карточку и возвращаете её  
-function createCard(link, name) { 
+export function createCard(link, name, id) { 
   const elementElement = elementTemplate.querySelector('.element').cloneNode(true); //клонируем содержимое elementTemplate
   // наполняем содержимым (карточки)
   elementElement.querySelector('.element__photo').src = link;
   elementElement.querySelector('.element__photo').alt = name;        
   elementElement.querySelector('.element__title').textContent = name;
+  elementElement.setAttribute("card-id" ,id);
   
   return elementElement;
 };
@@ -20,18 +21,21 @@ function createCard(link, name) {
 //создаем массив карточек
 export function addServerItem(data, myNameProfile) {
   for (let i = 0; i < data.length; i++) {
-    elements.prepend(createCard(data[i].link, data[i].name));
-    deletButtonElementDelet(data[i].owner.name, data[i]._id);
+    elements.prepend(createCard(data[i].link, data[i].name, data[i]._id));
+    deletButtonElementDelet(data[i].owner.name/*, data[i]._id*/);
     numberLikes (data[i].likes.length);
+
     likeButonServer(data[i].likes, myNameProfile.name);
   }  
 };
 
-function deletButtonElementDelet(data, id) {  //убирает кнопку удаления для карточек от других пользователей
-  const deletButtonItem = document.querySelector('.element__del-button');
-  deletButtonItem.closest('.element').setAttribute("card-id" ,id);
+function deletButtonElementDelet(data/*, id*/) {  //убирает кнопку удаления для карточек от других пользователей
+  //const deletButtonItem = document.querySelector('.element__del-button');
+  //deletButtonItem.closest('.element').setAttribute("card-id" ,id);
+  //document.querySelector('.element__del-button').closest('.element').setAttribute("card-id" ,id);
   if (data !== profileTitle.textContent){
-    deletButtonItem.remove();
+    //deletButtonItem.remove();
+    document.querySelector('.element__del-button').remove();
   } 
 };
 
@@ -45,9 +49,10 @@ function likeButonServer(data, myNameProfile) {
 };
 
 function numberLikes (data) {
-  const spanLike = document.querySelector('.element__like-number');
+  //const spanLike = document.querySelector('.element__like-number');
   if (data !== 0){
-    spanLike.textContent = data;
+    //spanLike.textContent = data;
+    document.querySelector('.element__like-number').textContent = data;
   }
 };
 
@@ -78,18 +83,25 @@ export function deletElem (evt) {
     }
 };
 
+//Форма создания карточек
 export function handleItemFormSubmit(evt) {
     evt.preventDefault(); 
-    elements.prepend(createCard(linkCard.value, nameCard.value));
+    /*elements.prepend(createCard(linkCard.value, nameCard.value));
     const submit = evt.target.querySelector('.form__submit').textContent;
     sendingServerCardItem(requestFromServer, {
       link: linkCard.value,
       name: nameCard.value
-    }, submit, evt.target.querySelector('.form__submit'));    
-    //elements.addEventListener('click', deletElem());
+    }, submit, evt.target.querySelector('.form__submit')); */ 
+    const submit = evt.target.querySelector('.form__submit').textContent;
+    sendingServerCardItem(requestFromServer, {
+      link: linkCard.value,
+      name: nameCard.value
+    }, submit, evt.target.querySelector('.form__submit')); 
+    //elements.prepend(createCard(linkCard.value, nameCard.value, res._id));
     closePopup(popupItem);
 };
   
+//Форма редактирования профиля
 export function editProfInfo(evt) {
     evt.preventDefault();
     profileTitle.textContent = nameImput.value;
@@ -105,11 +117,7 @@ export function editProfInfo(evt) {
 export function edidAvatar(evt) {
   evt.preventDefault();  
   profileImage.src = linkAvatar.value;
-  //console.log(profileImage);
   const submit = evt.target.querySelector('.form__submit').textContent;
-  //console.log(evt.target.querySelector('.form__submit'));
-  //submitButtonBefore(evt);
   setAvatarProfile(requestFromServer, linkAvatar.value, submit, evt.target.querySelector('.form__submit'));
-  //console.log(evt.target.closest('form__submit').textContent);
   closePopup(popupAvatar);
 }

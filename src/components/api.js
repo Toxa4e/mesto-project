@@ -1,5 +1,5 @@
-import { addServerItem } from "./cards.js";
-import { profileTitle , profileSubtitle , profileImage , serverResponse} from "./const.js";
+import { addServerItem , createCard} from "./cards.js";
+import { profileTitle , profileSubtitle , profileImage , serverResponse , elements} from "./const.js";
 import { renderLoading } from "./modal.js";
 
 //-----------------------------------------
@@ -47,10 +47,27 @@ export function sendingServerProfileInfo(requestFromServer, dataInput, submitBut
     })
   })
   .then(serverResponse)
-  .then((res) => {console.log(res);})
+  .then((res) => {console.log(res); })
   .catch((err) => {console.log(`Ошибка: ${err}`);})
   .finally(() => {renderLoading(false, submitButtonBefore, submitButtonAfter);});
 };
+
+/*//Отправка данных с Добавление новой карточки
+export function sendingServerCardItem(requestFromServer, dataInput, submitButtonBefore, submitButtonAfter) {
+  renderLoading(true, submitButtonBefore, submitButtonAfter);
+  return fetch(`${requestFromServer.fetchUrl}/cards`, {
+    method: 'POST',
+    headers: requestFromServer.headers,
+    body: JSON.stringify({
+      name: dataInput.name,
+      link: dataInput.link
+    })
+  })
+  .then(serverResponse)
+  .then((res) => {console.log(res);})
+  .catch((err) => {console.log(`Ошибка: ${err}`);})
+  .finally(() => {renderLoading(false, submitButtonBefore, submitButtonAfter);});
+};*/
 
 //Отправка данных с Добавление новой карточки
 export function sendingServerCardItem(requestFromServer, dataInput, submitButtonBefore, submitButtonAfter) {
@@ -64,7 +81,9 @@ export function sendingServerCardItem(requestFromServer, dataInput, submitButton
     })
   })
   .then(serverResponse)
-  .then((res) => {console.log(res);})
+  .then((res) => {console.log(res);
+    elements.prepend(createCard(res.link, res.name, res._id));
+  })
   .catch((err) => {console.log(`Ошибка: ${err}`);})
   .finally(() => {renderLoading(false, submitButtonBefore, submitButtonAfter);});
 };
