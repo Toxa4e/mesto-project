@@ -1,6 +1,4 @@
-import { popupProfile , popupItem , popupImage , pictureElement , figcaptionElement , formCards , nameImput , hobbiInput , profileTitle , profileSubtitle , submitCard , submitProf , popupAvatar , submitAvatar , formAvatar , profileImage , linkAvatar} from "./const.js";
-import { setAvatarProfile , sendingServerProfileInfo} from "./api.js";
-//import { validButton } from "./validate.js";
+import { popupProfile , popupItem , popupImage , pictureElement , figcaptionElement , formCards , nameImput , hobbiInput , profileTitle , profileSubtitle , popupAvatar , formAvatar } from "./const.js";
 
 export const openPopAvatar = function () {
   openPopup(popupAvatar);
@@ -64,13 +62,6 @@ function handleEscape (evt) {
 };
 
 
-export function renderLoading(isLoading, submitButtonBefore, submitButtonAfter) {
-  if (isLoading) {
-    submitButtonAfter.textContent = 'Сохранение...';
-  } else {
-    submitButtonAfter.textContent = submitButtonBefore;
-  }
-};
 /*
 export function renderLoading(isLoading, button, buttonText='Сохранить', loadingText='Сохранение...') {
   if (isLoading) {
@@ -80,7 +71,7 @@ export function renderLoading(isLoading, button, buttonText='Сохранить'
   }
 }*/
 //Форма редактирования профиля
-export function editProfInfo(evt) {
+/*export function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   //отпровляем на сервер и получаем ответ
   return sendingServerProfileInfo(nameImput.value, hobbiInput.value)
@@ -91,14 +82,57 @@ export function editProfInfo(evt) {
     profileSubtitle.textContent = res.about;
     closePopup(popupProfile);
   })
+};*/
+
+//Форма редактирования профиля
+/*export function handleProfileFormSubmit(evt) {
+  function makeRequest() {
+    //отпровляем на сервер и получаем ответ
+    return sendingServerProfileInfo(nameImput.value, hobbiInput.value)
+    //если все в порядке записываем в DOM
+    .then((res) => {
+      console.log(res); 
+      profileTitle.textContent = res.name;
+      profileSubtitle.textContent = res.about;
+      closePopup(popupProfile);
+    })
+  }
+  handleSubmit(makeRequest, evt);
 };
 
 //Форма редактирования аватара
-export function edidAvatar(evt) {
-  evt.preventDefault();  
-  return setAvatarProfile(linkAvatar.value)
-  .then((res) => {
-    profileImage.src = res.avatar;
-    closePopup(popupAvatar);
-  });
+export function handleAvatarFormSubmit(evt) {
+  function makeRequest() {
+    return setAvatarProfile(linkAvatar.value)
+    .then((res) => {
+      profileImage.src = res.avatar;
+      closePopup(popupAvatar);
+    })
+  }
+  handleSubmit(makeRequest, evt);
+};*/
+
+function renderLoading(isLoading, button, buttonText='Сохранить', loadingText='Сохранение...') {
+  if (isLoading) {
+    button.textContent = loadingText
+  } else {
+    button.textContent = buttonText
+  }
+};
+
+export function handleSubmit(request, evt, loadingText = "Сохранение...") {
+  evt.preventDefault();
+  const submitButton = evt.submitter;  // получаем кнопку сабмита из `evt`
+  const initialText = submitButton.textContent;  // записываем начальный текст кнопки до вызова запроса
+  renderLoading(true, submitButton, initialText, loadingText);  // изменяем текст кнопки до вызова запроса
+  request()
+    .then(() => {
+      evt.target.reset();
+    })
+    .catch((err) => {
+      console.error(`Ошибка: ${err}`);
+    })
+    .finally(() => {
+      renderLoading(false, submitButton, initialText);
+    });
 };

@@ -1,6 +1,6 @@
-import { nameImput , hobbiInput ,  popupItem  , popupProfile , profileTitle , profileSubtitle , elements , elementTemplate , linkCard , nameCard , requestFromServer , popupAvatar , profileImage} from "./const.js";
-import { closePopup , openImagePopup} from "./modal.js";
-import { sendingServerProfileInfo , sendingServerCardItem , deletServerCardItem , likeServerCardItem , deletLikeServerCardItem} from "./api.js";
+import { popupItem  , profileTitle , elements , elementTemplate , linkCard , nameCard } from "./const.js";
+import { closePopup , openImagePopup , handleSubmit} from "./modal.js";
+import {  sendingServerCardItem , deletServerCardItem , likeServerCardItem , deletLikeServerCardItem} from "./api.js";
 
 
 
@@ -34,9 +34,6 @@ export function createCard(data, myNameProfile) {
 export function addServerItem(data, myNameProfile) {
   for (let i = 0; i < data.length; i++) {
     elements.prepend(createCard(data[i], myNameProfile));
-    //deletButtonElementDelet(data[i].owner.name);
-    //numberLikes (data[i].likes.length);
-    //likeButonServer(data[i].likes, myNameProfile.name);
   }  
 };
 
@@ -70,64 +67,41 @@ export function likeElem (evt) {
     if (!evt.target.classList.contains('element__button_active')) {
       return likeServerCardItem(evt.target.closest('.element').getAttribute("card-id"))
       .then((data) => {
-        console.log(data.likes);
+        //console.log(data.likes);
         evt.target.classList.add('element__button_active');
         evt.target.closest('.element__button').nextElementSibling.textContent = Number(data.likes.length);
-      });
+      })
+      .catch((err) => {console.log(`Ошибка: ${err}`);});
     } else {
       return deletLikeServerCardItem(evt.target.closest('.element').getAttribute("card-id"))
       .then((data) => {
-        console.log(data.likes);
+        //console.log(data.likes);
         evt.target.classList.remove('element__button_active');
         evt.target.closest('.element__button').nextElementSibling.textContent = Number(data.likes.length);
-      });
+      })
+      .catch((err) => {console.log(`Ошибка: ${err}`);});
     }
   }
 };
-
-  
+ 
 //кнопка Удалить карточку
 export function deletElem (evt) {
-    if (evt.target.closest('.element__del-button')) {
-      return deletServerCardItem(evt.target.closest('.element').getAttribute("card-id"))
-      .then(() => evt.target.closest('.element').remove())      
-    }
+  if (evt.target.closest('.element__del-button')) {
+    return deletServerCardItem(evt.target.closest('.element').getAttribute("card-id"))
+    .then(() => evt.target.closest('.element').remove())
+    .catch((err) => {console.log(`Ошибка: ${err}`);})      
+  }
 };
 
 //Форма создания карточек
 export function handleItemFormSubmit(evt) {
-    evt.preventDefault(); 
+  function makeRequest() {
     return sendingServerCardItem(linkCard.value, nameCard.value)
     .then((data) => {
       //console.log(data);
       elements.prepend(createCard(data, data.owner));
       closePopup(popupItem);
     })
+  }
+  handleSubmit(makeRequest, evt);
 };
-  
-//Форма редактирования профиля
-/*export function editProfInfo(evt) {
-    evt.preventDefault();
-    profileTitle.textContent = nameImput.value;
-    profileSubtitle.textContent = hobbiInput.value;
-    const submit = evt.target.querySelector('.form__submit').textContent;
-    sendingServerProfileInfo(requestFromServer, {
-      name: nameImput.value,
-      about: hobbiInput.value
-    }, submit, evt.target.querySelector('.form__submit'));
-    closePopup(popupProfile);
-};*/
-
-//Форма редактирования профиля
-/*export function editProfInfo(evt) {
-  evt.preventDefault();
-  //отпровляем на сервер и получаем ответ
-  return sendingServerProfileInfo(nameImput.value, hobbiInput.value)
-  //если все в порядке записываем в DOM
-  .then((res) => {
-    console.log(res); 
-    profileTitle.textContent = res.name;
-    profileSubtitle.textContent = res.about;
-    closePopup(popupProfile);
-  })
-};*/

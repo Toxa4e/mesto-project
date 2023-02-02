@@ -68,13 +68,3 @@ export const toggleButtonState = (inputList, buttonElement, validationSettings) 
         buttonElement.classList.remove(validationSettings.inactiveButtonClass);
   }
 }; 
-
-/*export function validButton (submitCard, formValid) {
-  if (formValid) {
-    submitCard.classList.add('form__submit_inactive');
-    submitCard.disabled = true;
-  } else {
-    submitCard.classList.remove('form__submit_inactive');
-    submitCard.disabled = false;
-  }
-};*/
