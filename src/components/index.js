@@ -18,7 +18,10 @@ function renderInitialPage() {
         console.log(cards);
         updateUserData(profile);
         addServerItem(cards, profile);
-    });
+    })
+    .catch((err) => {
+        console.error(`Ошибка: ${err}`);
+    })
 };
 
 //addServerItem();

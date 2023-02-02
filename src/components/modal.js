@@ -2,21 +2,16 @@ import { popupProfile , popupItem , popupImage , pictureElement , figcaptionElem
 
 export const openPopAvatar = function () {
   openPopup(popupAvatar);
-  formAvatar.reset();
-  //validButton(submitAvatar, true);
 };
 
 export const openPopProf = function () {
   nameImput.value = profileTitle.textContent;
   hobbiInput.value = profileSubtitle.textContent; 
   openPopup(popupProfile);
-  //validButton(submitProf, true);
 };
 
 export const openPopItem = function () {
   openPopup(popupItem);
-  formCards.reset();
-  //validButton(submitCard, true);
 };
 
 //открытие Попапа формы
@@ -46,9 +41,6 @@ export function closePopup(popup) {
 //закрытие на крестик или оверлей
 function handlePopupClose (evt) {
   if (evt.target.closest('.popup__close')||evt.target.classList.contains('popup')) {
-    //closeAllPop();
-    //const popupOpened = document.querySelector('.popup_opened');
-    //closePopup(popupOpened);
     closePopup(evt.currentTarget);
   }
 };
@@ -60,57 +52,6 @@ function handleEscape (evt) {
     closePopup(popupOpened);
   }
 };
-
-
-/*
-export function renderLoading(isLoading, button, buttonText='Сохранить', loadingText='Сохранение...') {
-  if (isLoading) {
-    button.textContent = loadingText
-  } else {
-    button.textContent = buttonText
-  }
-}*/
-//Форма редактирования профиля
-/*export function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  //отпровляем на сервер и получаем ответ
-  return sendingServerProfileInfo(nameImput.value, hobbiInput.value)
-  //если все в порядке записываем в DOM
-  .then((res) => {
-    console.log(res); 
-    profileTitle.textContent = res.name;
-    profileSubtitle.textContent = res.about;
-    closePopup(popupProfile);
-  })
-};*/
-
-//Форма редактирования профиля
-/*export function handleProfileFormSubmit(evt) {
-  function makeRequest() {
-    //отпровляем на сервер и получаем ответ
-    return sendingServerProfileInfo(nameImput.value, hobbiInput.value)
-    //если все в порядке записываем в DOM
-    .then((res) => {
-      console.log(res); 
-      profileTitle.textContent = res.name;
-      profileSubtitle.textContent = res.about;
-      closePopup(popupProfile);
-    })
-  }
-  handleSubmit(makeRequest, evt);
-};
-
-//Форма редактирования аватара
-export function handleAvatarFormSubmit(evt) {
-  function makeRequest() {
-    return setAvatarProfile(linkAvatar.value)
-    .then((res) => {
-      profileImage.src = res.avatar;
-      closePopup(popupAvatar);
-    })
-  }
-  handleSubmit(makeRequest, evt);
-};*/
 
 function renderLoading(isLoading, button, buttonText='Сохранить', loadingText='Сохранение...') {
   if (isLoading) {
