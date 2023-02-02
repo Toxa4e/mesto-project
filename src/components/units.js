@@ -7,7 +7,7 @@ export const validationSettings = {
     errorClass: 'form__input-error_active'//
 };
 
-export const serverResponse = (res) => {
+export const checkServerResponse = (res) => {
   if (res.ok) {
     return res.json();
   } else {

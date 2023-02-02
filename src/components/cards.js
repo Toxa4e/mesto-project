@@ -67,17 +67,20 @@ function likeButonServer(data, myNameProfile, elementLikeButton) {
 //кнопка Лайк карточки c Отправкой
 export function likeElem (evt) {
   if (evt.target.closest('.element__button')) {
-    //console.log(evt.target.closest('.element').getAttribute("card-id"));
-    const likeNumber = evt.target.closest('.element__button').nextElementSibling.textContent;
-
     if (!evt.target.classList.contains('element__button_active')) {
-      evt.target.classList.add('element__button_active');
-      evt.target.closest('.element__button').nextElementSibling.textContent = Number(likeNumber) + 1;
-      likeServerCardItem(requestFromServer, evt.target.closest('.element').getAttribute("card-id"));
+      return likeServerCardItem(evt.target.closest('.element').getAttribute("card-id"))
+      .then((data) => {
+        console.log(data.likes);
+        evt.target.classList.add('element__button_active');
+        evt.target.closest('.element__button').nextElementSibling.textContent = Number(data.likes.length);
+      });
     } else {
-      evt.target.classList.remove('element__button_active');
-      evt.target.closest('.element__button').nextElementSibling.textContent = Number(likeNumber) - 1;
-      deletLikeServerCardItem(requestFromServer, evt.target.closest('.element').getAttribute("card-id"));
+      return deletLikeServerCardItem(evt.target.closest('.element').getAttribute("card-id"))
+      .then((data) => {
+        console.log(data.likes);
+        evt.target.classList.remove('element__button_active');
+        evt.target.closest('.element__button').nextElementSibling.textContent = Number(data.likes.length);
+      });
     }
   }
 };
@@ -85,9 +88,7 @@ export function likeElem (evt) {
   
 //кнопка Удалить карточку
 export function deletElem (evt) {
-  //const elementCard = evt.target.closest('.element')
     if (evt.target.closest('.element__del-button')) {
-      console.log(evt.target.closest('.element').getAttribute("card-id"));
       return deletServerCardItem(evt.target.closest('.element').getAttribute("card-id"))
       .then(() => evt.target.closest('.element').remove())      
     }
@@ -98,8 +99,8 @@ export function handleItemFormSubmit(evt) {
     evt.preventDefault(); 
     return sendingServerCardItem(linkCard.value, nameCard.value)
     .then((data) => {
-      console.log(data);
-      elements.prepend(createCard(data, data.owner.owner));
+      //console.log(data);
+      elements.prepend(createCard(data, data.owner));
       closePopup(popupItem);
     })
 };
