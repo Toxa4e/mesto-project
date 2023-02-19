@@ -1,9 +1,9 @@
 //import { checkServerResponse } from "./units.js";
 import { requestFromServer } from "./const.js";
 
-export default class Api {
+export class Api {
     constructor(requestFromServer) {
-        this._fetchUrl = requestFromServer.baseUrl;
+        this._fetchUrl = requestFromServer.fetchUrl;
         this._headers = requestFromServer.headers;
     }
 
@@ -17,29 +17,29 @@ export default class Api {
         return fetch(compileLink, options).then(this._checkServerResponse);
     }
 
-/*    _loadGetServerData(setting){
-        return Promise.all([getServerProfileInfo(setting), getServerCardsItem(setting)])
-      };
-      
-      //Получение карточек с сервера
-    _getServerCardsItem = () => request(`/cards`, {headers: requestFromServer.headers});
-      //Получение информации пользователя
-    _getServerProfileInfo = () => request(`/users/me`, {headers: requestFromServer.headers});
-    */
+    _loadGetServerData() {
+        return Promise.all([this.getServerProfileInfo(), this.getServerCardsItem()])
+    };
+
+    //Получение карточек с сервера
+    getServerCardsItem = () => this._request(`/cards`, { headers: this._headers });
+    //Получение информации пользователя
+    getServerProfileInfo = () => this._request(`/users/me`, { headers: this._headers });
+
 
     //Отправка данных с модального окна о пользователе
-    sendingServerProfileInfo({nameImput, hobbiInput}){ 
+    sendingServerProfileInfo({ nameImput, hobbiInput }) {
         this._request(`/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
                 name: nameImput,
-                about: hobbiInput 
+                about: hobbiInput
             })
         });
     }
     //Изменение аватара
-    setAvatarProfile(idItem) { 
+    setAvatarProfile(idItem) {
         this._request(`/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
@@ -59,6 +59,7 @@ export default class Api {
             })
         });
     }
+
     //Удаление карточки с сервера
     deletServerCardItem(idItem) {
         this._request(`/cards/${idItem}`, {
@@ -67,19 +68,10 @@ export default class Api {
         });
     }
 
-    //Лайк карточки с сервера
-    likeServerCardItem(idItem) {
-        this._request(`/cards/likes/${idItem}`, {
-            method: 'PUT',
-            headers: this._headers,
-        });
-    } 
-
-    //Удаление Лайка карточки с сервера
-    deletLikeServerCardItem(idItem) {
-        this._request(`/cards/likes/${idItem}`, {
-            method: 'DELETE',
-            headers: requestFromServer.headers,
-        }); 
+    toggleLike = (itemId, isLiked) => {
+        return this._request(`/cards/likes/${itemId}`, {
+            method: isLiked ? 'DELETE' : 'PUT',
+            headers: this._headers
+        })
     }
 }
