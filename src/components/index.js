@@ -12,12 +12,12 @@ import { validationSettings } from './units.js';
 import { loadGetServerData } from './api.js';
 import { updateUserData } from './profile';
 import { handleAvatarFormSubmit, handleProfileFormSubmit } from './profile';
+import { UserInfo } from './UserInfo.js';
 
-let _id;
 
 //Получаем карточки с сервера
 //Получаем данные профиля с сервера
-function renderInitialPage() {
+/*function renderInitialPage() {
     loadGetServerData()
         .then(([profile, cards]) => {
             console.log(profile);
@@ -27,14 +27,22 @@ function renderInitialPage() {
         .catch((err) => {
             console.error(`Ошибка: ${err}`);
         })
-};
+};*/
 
 document.addEventListener('DOMContentLoaded', () => {
     async function renderApp() {
         try {
             const api = new Api(requestFromServer);
             const [profile, cards] = await api._loadGetServerData();
-            _id = profile._id;
+
+            const userInfo = new UserInfo({
+                nameSelector: '.profile__title',
+                aboutSelector: '.profile__subtitle',
+                avatarSelector: '.profile__image',
+              });
+            userInfo.setUserInfo(profile);
+            const { _id } = userInfo.getUserInfo();
+            //console.log(_id);
 
             const cardList = new Section(
                 {
@@ -90,9 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //addServerItem();
-profileEditButton.addEventListener('click', openPopProf);
-profileButton.addEventListener('click', openPopItem);
-profileAvatar.addEventListener('click', openPopAvatar);
+//profileEditButton.addEventListener('click', openPopProf);
+//profileButton.addEventListener('click', openPopItem);
+//profileAvatar.addEventListener('click', openPopAvatar);
 
 //слушатель на Submit попапов
 formCards.addEventListener('submit', handleItemFormSubmit);
@@ -100,7 +108,7 @@ formProfile.addEventListener('submit', handleProfileFormSubmit);
 formAvatar.addEventListener('submit', handleAvatarFormSubmit);
 
 //Визуализировать начальную страницу
-renderInitialPage();
+//renderInitialPage();
 //инициировать валидацию
 enableValidation(validationSettings);
 
