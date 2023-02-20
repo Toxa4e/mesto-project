@@ -2,9 +2,12 @@ import { Popup } from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
 
-    constructor(data, popupSelector) {
+    constructor(popupSelector, {handleFormSubmit}) {
         //используем конструктор Popup
         super(popupSelector);
+        this._popupSelector = popupSelector;
+        this._handleFormSubmit = handleFormSubmit;
+        this._form = this.popup.querySelector('.form');
 
     }
     close (){
@@ -12,21 +15,24 @@ export default class PopupWithForm extends Popup {
         this.form.reset(); //сбрасывем форму
     }
 
-    _getInputValues() {}
+    _getInputValues() {
+        this._inputList = this._form.querySelectorAll('.form__input');  // достаём все элементы полей      
+        this._formValues = {};      
+        // добавляем в этот объект значения всех полей
+        this._inputList.forEach(input => {
+          this._formValues[input.name] = input.value;
+        });      
+        // возвращаем объект значений
+        return this._formValues;
+      } 
 
     addEventListeners() {
-        super.addEventListeners();
-//        formCards.addEventListener('submit', handleItemFormSubmit); 
-//        formProfile.addEventListener('submit', handleProfileFormSubmit); 
-//        formAvatar.addEventListener('submit', handleAvatarFormSubmit);  
+        super.addEventListeners();//добовляем слушатели при открыти Попапа
+        this._element.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            // добавим вызов функции _handleFormSubmit
+            // передадим ей объект — результат работы _getInputValues
+            this._handleFormSubmit(this._getInputValues());
+        });
     }
-
-
 }
-// 1. Кроме селектора попапа принимает в конструктор колбэк сабмита формы. В этом колбэке содержится метод класса Api.
-// 2. Содержит приватный метод _getInputValues, который собирает данные всех полей формы.
-// 3. Перезаписывает родительский метод setEventListeners. 
-//    Метод setEventListeners класса PopupWithForm должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
-// 4. Перезаписывает родительский метод close, так как при закрытии попапа форма должна ещё и сбрасываться.
-//
-// Для каждого попапа создавайте свой экземпляр класса PopupWithForm.
