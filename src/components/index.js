@@ -98,14 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //addServerItem();
-//profileEditButton.addEventListener('click', openPopProf);
-//profileButton.addEventListener('click', openPopItem);
-//profileAvatar.addEventListener('click', openPopAvatar);
+profileEditButton.addEventListener('click', openPopProf);
+profileButton.addEventListener('click', openPopItem);
+profileAvatar.addEventListener('click', openPopAvatar);
 
 //слушатель на Submit попапов
-formCards.addEventListener('submit', handleItemFormSubmit);
-formProfile.addEventListener('submit', handleProfileFormSubmit);
-formAvatar.addEventListener('submit', handleAvatarFormSubmit);
+//formCards.addEventListener('submit', handleItemFormSubmit);
+//formProfile.addEventListener('submit', handleProfileFormSubmit);
+f//ormAvatar.addEventListener('submit', handleAvatarFormSubmit);
 
 //Визуализировать начальную страницу
 //renderInitialPage();
