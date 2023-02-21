@@ -2,7 +2,7 @@ import { Popup } from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
 
-    constructor(popupSelector, {handleFormSubmit}) {
+    constructor({popupSelector, handleFormSubmit}) {
         //используем конструктор Popup
         super(popupSelector);
         this._popupSelector = popupSelector;
@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
     }
     close (){
         super.close();
-        this.form.reset(); //сбрасывем форму
+//        this.form.reset(); //сбрасывем форму
     }
 
     _getInputValues() {

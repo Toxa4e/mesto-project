@@ -14,6 +14,7 @@ import { updateUserData } from './profile';
 import { handleAvatarFormSubmit, handleProfileFormSubmit } from './profile';
 import { UserInfo } from './UserInfo.js';
 import { FormValidator } from './FormValidator.js';
+import PopupWithForm from './PopupWithForm.js';
 
 
 //Получаем карточки с сервера
@@ -30,10 +31,12 @@ import { FormValidator } from './FormValidator.js';
         })
 };*/
 
+const api = new Api(requestFromServer);
+
 document.addEventListener('DOMContentLoaded', () => {
     async function renderApp() {
         try {
-            const api = new Api(requestFromServer);
+            //const api = new Api(requestFromServer);
             const [profile, cards] = await api._loadGetServerData();
 
             const userInfo = new UserInfo({
@@ -58,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createCard(cardData, userId) {
-        const api = new Api(requestFromServer);
+        //const api = new Api(requestFromServer);
         const card = new Card(cardData, userId, {
             handleDelete: async (card) => {
                 try {
@@ -96,22 +99,58 @@ document.addEventListener('DOMContentLoaded', () => {
     renderApp();
 })
 
+//слушатель кнопки редактирования аватара
+profileAvatar.addEventListener('click', () => {
+    popupFormAvatar.open();
+});
+//слушатель кнопки редактирования профиля
+profileEditButton.addEventListener('click', () => {
+    popupFormProfile.open();
+});
+//слушатель кнопки добовления карточки
+profileButton.addEventListener('click', () => {
+    popupFormItem.open();
+});
+
+//Форма редактирования Аватара
+const popupFormAvatar = new PopupWithForm({
+    popupSelector: '.popup-avatar', 
+    handleFormSubmit: () => {api.setAvatarProfile()}
+  });
+// Слушатель submit отправки формы редактирования аватара профиля
+popupFormAvatar.addEventListeners();
+
+//Форма редактирования профиля
+const popupFormProfile = new PopupWithForm({
+    popupSelector: '.profile-popup', 
+    handleFormSubmit: () => {api.sendingServerProfileInfo()}
+  });
+// Слушатель submit отправки формы редактирования аватара профиля
+popupFormProfile.addEventListeners();
+
+//Форма добовления карточки
+const popupFormItem = new PopupWithForm({
+    popupSelector: '.popup-item', 
+    handleFormSubmit: () => {api.sendingServerCardItem()}
+  });
+// Слушатель submit отправки формы редактирования аватара профиля
+popupFormItem.addEventListeners();
 
 
 //addServerItem();
-profileEditButton.addEventListener('click', openPopProf);
-profileButton.addEventListener('click', openPopItem);
-profileAvatar.addEventListener('click', openPopAvatar);
+//profileEditButton.addEventListener('click', openPopProf);
+//profileButton.addEventListener('click', openPopItem);
+
 
 //слушатель на Submit попапов
-formCards.addEventListener('submit', handleItemFormSubmit);
-formProfile.addEventListener('submit', handleProfileFormSubmit);
-formAvatar.addEventListener('submit', handleAvatarFormSubmit);
+//formCards.addEventListener('submit', handleItemFormSubmit);
+//formProfile.addEventListener('submit', handleProfileFormSubmit);
+//formAvatar.addEventListener('submit', handleAvatarFormSubmit);
 
 //Визуализировать начальную страницу
 //renderInitialPage();
 
-//инициировать валидацию
+//Инициировать валидацию
 //enableValidation(validationSettings);
 export const profileFormValidator = new FormValidator(
     { validationSettings: validationSettings,
