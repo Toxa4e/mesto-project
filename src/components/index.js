@@ -13,6 +13,7 @@ import { loadGetServerData } from './api.js';
 import { updateUserData } from './profile';
 import { handleAvatarFormSubmit, handleProfileFormSubmit } from './profile';
 import { UserInfo } from './UserInfo.js';
+import { FormValidator } from './FormValidator.js';
 
 
 //Получаем карточки с сервера
@@ -103,12 +104,33 @@ profileButton.addEventListener('click', openPopItem);
 profileAvatar.addEventListener('click', openPopAvatar);
 
 //слушатель на Submit попапов
-//formCards.addEventListener('submit', handleItemFormSubmit);
-//formProfile.addEventListener('submit', handleProfileFormSubmit);
-f//ormAvatar.addEventListener('submit', handleAvatarFormSubmit);
+formCards.addEventListener('submit', handleItemFormSubmit);
+formProfile.addEventListener('submit', handleProfileFormSubmit);
+formAvatar.addEventListener('submit', handleAvatarFormSubmit);
 
 //Визуализировать начальную страницу
 //renderInitialPage();
+
 //инициировать валидацию
-enableValidation(validationSettings);
+//enableValidation(validationSettings);
+export const profileFormValidator = new FormValidator(
+    { validationSettings: validationSettings,
+        form: formProfile 
+    },
+  );
+  profileFormValidator.enableValidation();
+  
+  export const cardFormValidator = new FormValidator(
+    { validationSettings: validationSettings,
+        form: formCards 
+    },
+  );
+  cardFormValidator.enableValidation();
+  
+  const avatarFormValidator = new FormValidator(
+    { validationSettings: validationSettings,
+        form: formAvatar 
+    },
+  );
+  avatarFormValidator.enableValidation();
 
