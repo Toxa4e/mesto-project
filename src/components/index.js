@@ -31,19 +31,17 @@ import PopupWithForm from './PopupWithForm.js';
         })
 };*/
 
-const api = new Api(requestFromServer);
-
 document.addEventListener('DOMContentLoaded', () => {
+    const api = new Api(requestFromServer);
     async function renderApp() {
         try {
-            //const api = new Api(requestFromServer);
             const [profile, cards] = await api._loadGetServerData();
 
             const userInfo = new UserInfo({
                 nameSelector: '.profile__title',
                 aboutSelector: '.profile__subtitle',
                 avatarSelector: '.profile__image',
-              });
+            });
             userInfo.setUserInfo(profile);
             const { _id } = userInfo.getUserInfo();
             //console.log(_id);
@@ -61,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createCard(cardData, userId) {
-        //const api = new Api(requestFromServer);
         const card = new Card(cardData, userId, {
             handleDelete: async (card) => {
                 try {
@@ -114,25 +111,25 @@ profileButton.addEventListener('click', () => {
 
 //Форма редактирования Аватара
 const popupFormAvatar = new PopupWithForm({
-    popupSelector: '.popup-avatar', 
-    handleFormSubmit: () => {api.setAvatarProfile()}
-  });
+    popupSelector: '.popup-avatar',
+    handleFormSubmit: () => { api.setAvatarProfile() }
+});
 // Слушатель submit отправки формы редактирования аватара профиля
 popupFormAvatar.addEventListeners();
 
 //Форма редактирования профиля
 const popupFormProfile = new PopupWithForm({
-    popupSelector: '.profile-popup', 
-    handleFormSubmit: () => {api.sendingServerProfileInfo()}
-  });
+    popupSelector: '.profile-popup',
+    handleFormSubmit: () => { api.sendingServerProfileInfo() }
+});
 // Слушатель submit отправки формы редактирования аватара профиля
 popupFormProfile.addEventListeners();
 
 //Форма добовления карточки
 const popupFormItem = new PopupWithForm({
-    popupSelector: '.popup-item', 
-    handleFormSubmit: () => {api.sendingServerCardItem()}
-  });
+    popupSelector: '.popup-item',
+    handleFormSubmit: () => { api.sendingServerCardItem() }
+});
 // Слушатель submit отправки формы редактирования аватара профиля
 popupFormItem.addEventListeners();
 
@@ -153,23 +150,26 @@ popupFormItem.addEventListeners();
 //Инициировать валидацию
 //enableValidation(validationSettings);
 export const profileFormValidator = new FormValidator(
-    { validationSettings: validationSettings,
-        form: formProfile 
+    {
+        validationSettings: validationSettings,
+        form: formProfile
     },
-  );
-  profileFormValidator.enableValidation();
-  
-  export const cardFormValidator = new FormValidator(
-    { validationSettings: validationSettings,
-        form: formCards 
+);
+profileFormValidator.enableValidation();
+
+export const cardFormValidator = new FormValidator(
+    {
+        validationSettings: validationSettings,
+        form: formCards
     },
-  );
-  cardFormValidator.enableValidation();
-  
-  const avatarFormValidator = new FormValidator(
-    { validationSettings: validationSettings,
-        form: formAvatar 
+);
+cardFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(
+    {
+        validationSettings: validationSettings,
+        form: formAvatar
     },
-  );
-  avatarFormValidator.enableValidation();
+);
+avatarFormValidator.enableValidation();
 
