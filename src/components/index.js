@@ -5,6 +5,7 @@ import { Section } from './Section';
 import { Api } from './api_NEW';
 import { PopupWithImage } from './PopupWithImage'
 import { profileEditButton, profileButton, formCards, formProfile, profileAvatar, formAvatar, requestFromServer } from './const';
+import { popupProfile , nameImput , hobbiInput , popupAvatar , linkAvatar , profileTitle , profileSubtitle , profileImage} from "./const.js";
 import { openPopProf, openPopItem, openPopAvatar } from './modal.js';
 import { handleItemFormSubmit, addServerItem } from './cards.js';
 import { enableValidation } from './validate.js';
@@ -30,18 +31,20 @@ import PopupWithForm from './PopupWithForm.js';
             console.error(`Ошибка: ${err}`);
         })
 };*/
+const api = new Api(requestFromServer);
+
+const userInfo = new UserInfo({
+    nameSelector: '.profile__title',
+    aboutSelector: '.profile__subtitle',
+    avatarSelector: '.profile__image',
+});
 
 document.addEventListener('DOMContentLoaded', () => {
-    const api = new Api(requestFromServer);
+    
     async function renderApp() {
         try {
             const [profile, cards] = await api._loadGetServerData();
-
-            const userInfo = new UserInfo({
-                nameSelector: '.profile__title',
-                aboutSelector: '.profile__subtitle',
-                avatarSelector: '.profile__image',
-            });
+           
             userInfo.setUserInfo(profile);
             const { _id } = userInfo.getUserInfo();
             //console.log(_id);
@@ -109,18 +112,47 @@ profileButton.addEventListener('click', () => {
     popupFormItem.open();
 });
 
+
 //Форма редактирования Аватара
 const popupFormAvatar = new PopupWithForm({
     popupSelector: '.popup-avatar',
-    handleFormSubmit: () => { api.setAvatarProfile() }
-});
+    handleFormSubmit: (data) => {
+        popupFormAvatar.renderLoading(true);
+        return api.setAvatarProfile(linkAvatar.value)
+        .then((res) => {
+           userInfo.setUserInfo(res);
+           popupFormAvatar.close()
+        })
+        .catch((err) => {
+            console.error(`Ошибка: ${err}`);
+        })
+        .finally(() => {
+            popupFormAvatar.renderLoading(false);
+        })
+      }
+    });
 // Слушатель submit отправки формы редактирования аватара профиля
 popupFormAvatar.addEventListeners();
+
 
 //Форма редактирования профиля
 const popupFormProfile = new PopupWithForm({
     popupSelector: '.profile-popup',
-    handleFormSubmit: () => { api.sendingServerProfileInfo() }
+    handleFormSubmit: () => {
+        popupFormProfile.renderLoading(true);
+    
+        api.sendingServerProfileInfo(nameImput.value, hobbiInput.value)
+        .then((res) => {
+            userInfo.setUserInfo(res);
+            popupFormProfile.close();
+        })
+        .catch((err) => {
+            console.error(`Ошибка: ${err}`);
+        })
+        .finally(() => {
+            popupFormProfile.renderLoading(false);
+        })
+      }
 });
 // Слушатель submit отправки формы редактирования аватара профиля
 popupFormProfile.addEventListeners();
@@ -128,7 +160,20 @@ popupFormProfile.addEventListeners();
 //Форма добовления карточки
 const popupFormItem = new PopupWithForm({
     popupSelector: '.popup-item',
-    handleFormSubmit: () => { api.sendingServerCardItem() }
+    handleFormSubmit: (data) => {
+        popupCardAdd.renderLoading(true);
+    
+        api.sendingServerCardItem(linkCard.value, nameCard.value)
+        .then((result) => {
+         // создать карточку
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          popupCardAdd.renderLoading(false);
+        })
+      }
 });
 // Слушатель submit отправки формы редактирования аватара профиля
 popupFormItem.addEventListeners();
@@ -172,4 +217,3 @@ const avatarFormValidator = new FormValidator(
     },
 );
 avatarFormValidator.enableValidation();
-
