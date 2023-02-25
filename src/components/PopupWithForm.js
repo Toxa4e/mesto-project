@@ -18,12 +18,6 @@ export default class PopupWithForm extends Popup {
 //        this.form.reset(); //сбрасывем форму
     }
 
-/*    setInputValues(data) {
-        this._inputList.forEach((input) => {
-          input.value = data[input.name];
-        });
-      }*/
-
     _getInputValues() {
         this._formValues = {};      
         // добавляем в этот объект значения всех полей
