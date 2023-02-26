@@ -7,15 +7,15 @@ export default class PopupWithForm extends Popup {
         super(popupSelector);
         this._popupSelector = popupSelector;
         this._handleFormSubmit = handleFormSubmit;
-        this._form = this._popup.querySelector('.form');
-        this._inputList = this._form.querySelectorAll('.form__input');  // достаём все элементы полей   
-        this._submitButton = this._form.querySelector('.form__submit');
+        this.form = this._popup.querySelector('.form');
+        this._inputList = this.form.querySelectorAll('.form__input');  // достаём все элементы полей   
+        this._submitButton = this.form.querySelector('.form__submit');
         this._initialText = this._submitButton.textContent;
 
     }
     close (){
         super.close();
-//        this.form.reset(); //сбрасывем форму
+        this.form.reset(); //сбрасывем форму
     }
 
     _getInputValues() {
@@ -26,11 +26,20 @@ export default class PopupWithForm extends Popup {
         });      
         // возвращаем объект значений
         return this._formValues;
-      } 
+    } 
+    
+    setInputValues(data) {
+        //console.log(this._inputList);
+        this._inputList.forEach((input) => {
+        input.value = data[input.name];
+        //console.log(data[input.name]);
+        console.log(input.name);
+        });
+    }
 
     addEventListeners() {
         super.addEventListeners();//добовляем слушатели при открыти Попапа
-        this._form.addEventListener('submit', (evt) => {
+        this.form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             // добавим вызов функции _handleFormSubmit
             // передадим ей объект — результат работы _getInputValues

@@ -20,11 +20,16 @@ const userInfo = new UserInfo({
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+    const api = new Api(requestFromServer);
     async function renderApp() {
         try {
             const [profile, cards] = await api._loadGetServerData();
-           
+
+            const userInfo = new UserInfo({
+                nameSelector: '.profile__title',
+                aboutSelector: '.profile__subtitle',
+                avatarSelector: '.profile__image',
+            });
             userInfo.setUserInfo(profile);
             const { _id } = userInfo.getUserInfo();
             //console.log(_id);
@@ -117,6 +122,10 @@ avatarFormValidator.enableValidation();
 //слушатель кнопки редактирования профиля
 profileEditButton.addEventListener('click', () => {
     popupFormProfile.open();
+    const {name, about} = userInfo.getUserInfo();
+    const data = { nameProfile:name, hobbi:about };
+    console.log(data);
+    popupFormProfile.setInputValues(data);
 });
 //Форма редактирования профиля
 const popupFormProfile = new PopupWithForm({
@@ -125,7 +134,6 @@ const popupFormProfile = new PopupWithForm({
         try {
             popupFormProfile.renderLoading(true);
             api.sendingServerProfileInfo({ nameImput:data.nameProfile, hobbiInput:data.hobbi });
-            //console.log(data);
             profileTitle.textContent = data.nameProfile;
             profileSubtitle.textContent = data.hobbi;
             popupFormProfile.close();
