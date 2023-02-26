@@ -15,7 +15,8 @@ export default class PopupWithForm extends Popup {
     }
     close (){
         super.close();
-        this.form.reset(); //сбрасывем форму
+        //this.form.reset(); //сбрасывем форму
+        setTimeout(() => this.form.reset(), 0);
     }
 
     _getInputValues() {
