@@ -50,7 +50,7 @@ export class Api {
     }
     //Отправка данных с Добавление новой карточки
     sendingServerCardItem(linkCard, nameCard) {
-        this._request(`/cards`, {
+        return this._request(`/cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
