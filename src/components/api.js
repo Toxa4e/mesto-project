@@ -40,7 +40,7 @@ export class Api {
     }
     //Изменение аватара
     setAvatarProfile(idItem) {
-        this._request(`/users/me/avatar`, {
+        return this._request(`/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({

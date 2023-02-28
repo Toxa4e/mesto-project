@@ -33,14 +33,13 @@ export default class PopupWithForm extends Popup {
         //console.log(this._inputList);
         this._inputList.forEach((input) => {
         input.value = data[input.name];
-        //console.log(data[input.name]);
-        console.log(input.name);
         });
     }
 
     addEventListeners() {
         super.addEventListeners();//добовляем слушатели при открыти Попапа
         this.form.addEventListener('submit', (evt) => {
+            evt.stopImmediatePropagation();
             evt.preventDefault();
             // добавим вызов функции _handleFormSubmit
             // передадим ей объект — результат работы _getInputValues
