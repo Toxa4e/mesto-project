@@ -29,7 +29,7 @@ export class Api {
 
     //Отправка данных с модального окна о пользователе
     sendingServerProfileInfo({ nameImput, hobbiInput }) {
-        this._request(`/users/me`, {
+        return this._request(`/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -62,7 +62,7 @@ export class Api {
 
     //Удаление карточки с сервера
     deletServerCardItem(idItem) {
-        this._request(`/cards/${idItem}`, {
+        return this._request(`/cards/${idItem}`, {
             method: 'DELETE',
             headers: this._headers,
         });
