@@ -20,18 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
         avatarSelector: '.profile__image',
     });
 
+    let _id;
+
+    const cardList = new Section(
+        {
+            renderer: (cardData) => {
+                cardList.addItem(createCard(cardData, _id));
+            },
+        });
+
     async function renderApp() {
         try {
             const [profile, cards] = await api._loadGetServerData();
-            userInfo.setUserInfo(profile);
-            const { _id } = userInfo.getUserInfo();
 
-            const cardList = new Section(
-                {
-                    renderer: (cardData) => {
-                        cardList.addItem(createCard(cardData, _id));
-                    },
-                });
+            userInfo.setUserInfo(profile);
+            _id = userInfo.getUserInfo()._id;
             cardList.render(cards);
         } catch (err) {
             console.error(`Ошибка: ${err}`);
@@ -39,12 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createCard(cardData, userId) {
-        const card = new Card(cardData, userId, {
+        const card = new Card('#element', cardData, userId, {
             handleDelete: async (card) => {
                 try {
-                    card.remove();
                     const { id } = card.getData();
-                    api.deletServerCardItem(id)
+                    await api.deletServerCardItem(id);
+                    card.remove();
                 } catch (err) {
                     console.error(`Ошибка: ${err}`);
                 }
@@ -80,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     profileButton.addEventListener('click', () => {
         popupFormItem.open();
     });
-        
+
     //Форма добовления карточки
     const popupFormItem = new PopupWithForm({
         popupSelector: '.popup-item',
@@ -88,14 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 popupFormItem.renderLoading(true);
                 const cardData = await api.sendingServerCardItem(data.linkCard, data.nameCard);
-                const { _id } = userInfo.getUserInfo();
                 const newCard = createCard(cardData, _id);
-                const cardList = new Section(
-                    {
-                        renderer: (cardData) => {
-                            cardList.addItem(createCard(newCard));
-                        },
-                    });
                 cardList.addItem(newCard)
                 popupFormItem.close();
             } catch (err) {
@@ -128,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         handleFormSubmit: async (data) => {
             try {
                 popupFormAvatar.renderLoading(true);
-                
+
                 api.setAvatarProfile(data.linkAvatar);
                 const avatar = data.linkAvatar;
                 userInfo.setUserInfo({ avatar });

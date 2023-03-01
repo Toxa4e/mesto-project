@@ -1,4 +1,5 @@
 export class Card {
+  _templateSelector;
   _link;
   _name;
   _owner;
@@ -18,9 +19,11 @@ export class Card {
   _handleLike;
 
   constructor(
+    templateSelector,
     { name, link, owner, likes, _id },
     userId,
     { handleLike, handleImageClick, handleDelete },) {
+    this._templateSelector = templateSelector;
     this._link = link;
     this._name = name;
     this._owner = owner;
@@ -41,7 +44,7 @@ export class Card {
   }
 
   _getElement() {
-    return document.querySelector('#element').content.querySelector('.element').cloneNode(true);
+    return document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
   }
 
   generate() {
