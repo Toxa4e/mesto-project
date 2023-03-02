@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
             handleImageClick: async () => {
                 try {
                     popupWithImage.open(cardData);
-                    popupWithImage.addEventListeners();
                 } catch (err) {
                     console.error(`Ошибка: ${err}`);
                 }
