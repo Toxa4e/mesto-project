@@ -1,5 +1,5 @@
 //import { checkServerResponse } from "./units.js";
-import { requestFromServer } from "./const.js";
+import { requestFromServer } from "../utils/const.js";
 
 export class Api {
     constructor(requestFromServer) {

@@ -1,14 +1,14 @@
 import '../pages/index.css'; // добавьте импорт главного файла стилей
 
-import { Card } from './Card.js'
-import { Section } from './Section';
-import { Api } from './Api';
-import { PopupWithImage } from './PopupWithImage'
-import { profileEditButton, profileButton, formCards, formProfile, profileAvatar, formAvatar, requestFromServer } from './const';
-import { validationSettings } from './units.js';
-import { UserInfo } from './UserInfo.js';
-import { FormValidator } from './FormValidator.js';
-import PopupWithForm from './PopupWithForm.js';
+import { Card } from '../components/Card.js'
+import { Section } from '../components/Section';
+import { Api } from '../components/Api';
+import { PopupWithImage } from '../components/PopupWithImage'
+import { profileEditButton, profileButton, formCards, formProfile, profileAvatar, formAvatar, requestFromServer } from '../utils/const';
+import { validationSettings } from '../utils/utils.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { FormValidator } from '../components/FormValidator.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -64,24 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
             handleImageClick: async () => {
                 try {
                     popupWithImage.open(cardData);
+                    popupWithImage.addEventListeners();
                 } catch (err) {
                     console.error(`Ошибка: ${err}`);
                 }
             }
         });
 
-        const popupWithImage = new PopupWithImage({
-            popupSelector: '.popup-image'
-        });
-
         return card.generate();
     }
     renderApp();
 
-    // Форма добовления карточек
-    //слушатель кнопки добовления карточки
-    profileButton.addEventListener('click', () => {
-        popupFormItem.open();
+
+    const popupWithImage = new PopupWithImage({
+        popupSelector: '.popup-image'
     });
 
     //Форма добовления карточки
@@ -101,31 +97,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    // Слушатель submit отправки формы добавления карточки
-    popupFormItem.addEventListeners();
-
-    //Инициировать валидацию формы добовления карточек
-    const cardFormValidator = new FormValidator(
-        {
-            validationSettings: validationSettings,
-            form: formCards
-        },
-    );
-    cardFormValidator.enableValidation();
 
     // Форма редактирования аватара пользователя
-    //слушатель кнопки редактирования аватара
-    profileAvatar.addEventListener('click', () => {
-        popupFormAvatar.open();
-    });
-    //Форма редактирования Аватара
     const popupFormAvatar = new PopupWithForm({
         popupSelector: '.popup-avatar',
         handleFormSubmit: async (data) => {
             try {
                 popupFormAvatar.renderLoading(true);
 
-                api.setAvatarProfile(data.linkAvatar);
+                await api.setAvatarProfile(data.linkAvatar);
                 const avatar = data.linkAvatar;
                 userInfo.setUserInfo({ avatar });
                 popupFormAvatar.close();
@@ -136,32 +116,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    // Слушатель submit отправки формы редактирования аватара профиля
-    popupFormAvatar.addEventListeners();
-    //Инициировать валидацию формы аватара
-    const avatarFormValidator = new FormValidator(
-        {
-            validationSettings: validationSettings,
-            form: formAvatar
-        },
-    );
-    avatarFormValidator.enableValidation();
 
     // Форма редактирования профиля пользователя
-    //слушатель кнопки редактирования профиля
-    profileEditButton.addEventListener('click', () => {
-        popupFormProfile.open();
-        const { name, about } = userInfo.getUserInfo();
-        const data = { nameProfile: name, hobbi: about };
-        popupFormProfile.setInputValues(data);
-    });
-    //Форма редактирования профиля
     const popupFormProfile = new PopupWithForm({
         popupSelector: '.profile-popup',
         handleFormSubmit: async (data) => {
             try {
                 popupFormProfile.renderLoading(true);
-                api.sendingServerProfileInfo({ nameImput: data.nameProfile, hobbiInput: data.hobbi });
+                await api.sendingServerProfileInfo({ nameImput: data.nameProfile, hobbiInput: data.hobbi });
                 userInfo.setUserInfo({ name: data.nameProfile, about: data.hobbi });
                 popupFormProfile.close();
             } catch (err) {
@@ -171,14 +133,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-    // Слушатель submit отправки формы редактирования профиля
-    popupFormProfile.addEventListeners();
-    //Инициировать валидацию формы редактирования профиля
-    const profileFormValidator = new FormValidator(
-        {
-            validationSettings: validationSettings,
-            form: formProfile
-        },
-    );
-    profileFormValidator.enableValidation();
+
+    //слушатель кнопки добовления карточки
+    profileButton.addEventListener('click', () => {
+        popupFormItem.open();
+        formValidators['formCards'].resetValidation()
+    });
+    //слушатель кнопки редактирования аватара
+    profileAvatar.addEventListener('click', () => {
+        popupFormAvatar.open();
+        formValidators['formAvatar'].resetValidation()
+    });
+    //слушатель кнопки редактирования профиля
+    profileEditButton.addEventListener('click', () => {
+        popupFormProfile.open();
+        formValidators['formProfile'].resetValidation()
+        const { name, about } = userInfo.getUserInfo();
+        const data = { nameProfile: name, hobbi: about };
+        popupFormProfile.setInputValues(data);
+    });
+
 })
+
+//Валидация форм
+const formValidators = {}
+
+// Включение валидации
+const enableValidation = (config) => {
+    const formList = Array.from(document.querySelectorAll(config.formSelector))
+    formList.forEach((formElement) => {
+        const validator = new FormValidator(config, formElement)
+        // получаем данные из атрибута `name` у формы
+        const formName = formElement.getAttribute('name')
+
+        // вот тут в объект записываем под именем формы
+        formValidators[formName] = validator;
+        validator.enableValidation();
+    });
+};
+//инициировать валидацию
+enableValidation(validationSettings);
